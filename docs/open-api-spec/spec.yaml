@@ -1,0 +1,452 @@
+openapi: 3.0.1
+info:
+  title: coda19
+  version: v1
+paths:
+  /api/v1/admin/covid/case:
+    post:
+      tags:
+        - Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CovidCase'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CovidCase'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CovidCase'
+      responses:
+        '201':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+  /api/v1/admin/covid/advice:
+    post:
+      tags:
+        - Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CovidInformation'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CovidInformation'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CovidInformation'
+      responses:
+        '201':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+  /api/v1/admin/covid/info:
+    post:
+      tags:
+        - Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CovidInformation'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CovidInformation'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CovidInformation'
+      responses:
+        '201':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseModel'
+  /api/v1/evolution:
+    get:
+      tags:
+        - Evolution
+      parameters:
+        - name: FromDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: ToDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: FromAge
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: ToAge
+          in: query
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: Location
+          in: query
+          schema:
+            type: string
+            nullable: true
+        - name: Gender
+          in: query
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: Tags
+          in: query
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CovidCase'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CovidCase'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CovidCase'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+  /api/v1/prediction:
+    get:
+      tags:
+        - Prediction
+      parameters:
+        - name: FromDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: ToDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+            nullable: true
+        - name: FromAge
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: ToAge
+          in: query
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: Location
+          in: query
+          schema:
+            type: string
+            nullable: true
+        - name: Gender
+          in: query
+          schema:
+            type: integer
+            format: int32
+            nullable: true
+        - name: Tags
+          in: query
+          schema:
+            type: string
+            nullable: true
+        - name: DaysAhead
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: IsolationFactor
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PredictionResult'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PredictionResult'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PredictionResult'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+  /api/v1/support/tips:
+    get:
+      tags:
+        - Support
+      parameters:
+        - name: Title
+          in: query
+          schema:
+            type: string
+            nullable: true
+        - name: Tags
+          in: query
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+  /api/v1/support/advice:
+    get:
+      tags:
+        - Support
+      parameters:
+        - name: Title
+          in: query
+          schema:
+            type: string
+            nullable: true
+        - name: Tags
+          in: query
+          schema:
+            type: string
+            nullable: true
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+  /api/v1/support/history:
+    get:
+      tags:
+        - Support
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CovidInformation'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponseModel'
+components:
+  schemas:
+    CovidCase:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date-time
+        gender:
+          type: string
+          nullable: true
+        age:
+          type: integer
+          format: int32
+        location:
+          type: string
+          nullable: true
+        information:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        type:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ResponseModel:
+      type: object
+      additionalProperties: false
+    CovidInformation:
+      type: object
+      properties:
+        title:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ErrorResponseModel:
+      type: object
+      properties:
+        error:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PredictionResult:
+      type: object
+      properties:
+        dateTime:
+          type: string
+          format: date-time
+        type:
+          type: string
+          nullable: true
+      additionalProperties: false
