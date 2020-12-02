@@ -1,0 +1,22 @@
+@import '../../styles/colors.scss';
+
+.nav-list {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+}
+
+.nav-item {
+  color: $gray-nobel;
+  font-size: 0.9rem;
+  margin-right: 1.3rem;
+  text-decoration: none;
+
+  &:hover {
+    color: $gray-dim;
+  }
+}
+
+.active-nav-item {
+  color: $gray-dark-charcoal;
+}
