@@ -1,0 +1,41 @@
+body {
+    max-width: 21cm;
+    margin: auto;
+    line-height: 1.6;
+    font-weight: 300;
+    font-family: Roboto,sans-serif;
+}
+
+h1, h2 {
+    color:#4b0061;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    letter-spacing: .0375em;
+}
+
+header>h1 {
+    margin: 0;
+    font-size: 3em;
+    padding-top: 4em;
+}
+
+[role=directory] ol, ol[role=directory] {
+    list-style-type: none;
+}
+
+[role=contentinfo] a {
+    text-decoration: none;
+}
+
+a {
+    background-color: transparent;
+}
+
+.mobile-image {
+    width: 30%;
+}
+
+.desktop-image {
+    width: 70%;
+}
