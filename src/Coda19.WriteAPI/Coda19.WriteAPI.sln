@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coda19.WriteAPI", "Coda19.WriteAPI\Coda19.WriteAPI.csproj", "{7715FC17-F8E3-484A-8910-911429C09F40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coda19.Core", "Coda19.Core\Coda19.Core.csproj", "{3F9DC431-2B93-4181-BFFD-D8E166B825D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coda19.Reader", "Coda19.Reader\Coda19.Reader.csproj", "{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Debug|x64.Build.0 = Debug|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Debug|x86.Build.0 = Debug|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Release|x64.ActiveCfg = Release|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Release|x64.Build.0 = Release|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Release|x86.ActiveCfg = Release|Any CPU
+		{7715FC17-F8E3-484A-8910-911429C09F40}.Release|x86.Build.0 = Release|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Debug|x64.Build.0 = Debug|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Debug|x86.Build.0 = Debug|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Release|x64.ActiveCfg = Release|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Release|x64.Build.0 = Release|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{3F9DC431-2B93-4181-BFFD-D8E166B825D4}.Release|x86.Build.0 = Release|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Debug|x64.Build.0 = Debug|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Debug|x86.Build.0 = Debug|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Release|x64.ActiveCfg = Release|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Release|x64.Build.0 = Release|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Release|x86.ActiveCfg = Release|Any CPU
+		{FB8FDBC3-0DD6-43FD-A925-043F6D11792C}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F567862-4E0D-4DDC-8CA1-4C40722E0230}
+	EndGlobalSection
+EndGlobal
