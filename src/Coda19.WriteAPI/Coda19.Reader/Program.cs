@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Coda19.Reader
 {
@@ -6,9 +7,14 @@ namespace Coda19.Reader
     {
         public static async Task Main(string[] args)
         {
-            switch (1)
+            /*
+             * INPUT: case, filePath
+             * case1: OWID
+             */
+            switch (Convert.ToInt32(args[0]))
             {
-                case 1: await new OurWorldInData().Read(); break;
+                case 1: await new OurWorldInData(args[1]).Read(); break;
+                default:break;
             }
         }
     }
