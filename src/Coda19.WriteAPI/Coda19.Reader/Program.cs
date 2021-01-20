@@ -8,6 +8,7 @@ namespace Coda19.Reader
         public static async Task Main(string[] args)
         {
             /*
+             * dotnet run 1 "C:\Users\SixthMagnitudeStar\Documents\repos\coda19\src\owid-covid-data.json" -c=Release
              * INPUT: case, filePath
              * case1: OWID
              */

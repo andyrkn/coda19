@@ -48,7 +48,8 @@ namespace Coda19.Reader
                     .AddLiteralTriple($"{OWIDConstants.LocationPrefix}:{nameof(CountryModel.HospitalBedsPerThousand)}", entry.Value.HospitalBedsPerThousand)
                     .Get();
 
-                await Task.Run(() => connector.UpdateGraph(OWIDConstants.LocationUri, locationTriples, null));
+                await Task.Run(() => connector.UpdateGraph(OWIDConstants.LocationUri, locationTriples, null))
+                    .ConfigureAwait(false);
 
                 var eventTriples = entry.Value.Data.Select(dayModel =>
                     {
@@ -70,7 +71,7 @@ namespace Coda19.Reader
                             .Get();
                     })
                     .SelectMany(locTriples => locTriples);
-                await Task.Run(() => connector.UpdateGraph(OWIDConstants.EventsUri, eventTriples, null));
+                await Task.Run(() => connector.UpdateGraph(OWIDConstants.EventsUri, eventTriples, null)).ConfigureAwait(false);
             });
 
             await Task.WhenAll(tasks);
