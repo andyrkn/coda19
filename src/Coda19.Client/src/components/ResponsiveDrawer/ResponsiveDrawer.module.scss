@@ -1,0 +1,29 @@
+@import 'shared/colors.scss';
+
+:global(.MuiPaper-root.MuiDrawer-paper.MuiDrawer-paperAnchorLeft.MuiPaper-elevation16) {
+  width: 55vw;
+
+  background-color: $venice-blue !important;
+
+  color: $white !important;
+}
+
+.container {
+  :global(.MuiDivider-root) {
+    margin-top: 4em;
+
+    background-color: $divider-white;
+  }
+
+  .logoSvg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    padding: 1.3em;
+  }
+
+  :global(.MuiSvgIcon-root) {
+    color: $white;
+  }
+}

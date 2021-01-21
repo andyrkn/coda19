@@ -1,0 +1,40 @@
+@import 'shared/mixins.scss';
+@import 'shared/colors.scss';
+
+.container {
+  height: 70vh;
+
+  background-color: $venice-blue;
+
+  color: $white;
+
+  :global(.MuiAppBar-root) {
+    box-shadow: none;
+
+    background-color: inherit;
+  }
+
+  .textWrapper {
+    @include flexCenterColumn;
+
+    .title {
+      margin-top: 4.5em;
+    }
+
+    .description {
+      font-weight: 100;
+    }
+  }
+
+  .topRightSvg,
+  .centerSvg {
+    @include topRightZeroAbsolute;
+  }
+
+  .centerSvg {
+    transform: scale(1.5);
+
+    margin-top: 35vh;
+    margin-right: 25vw;
+  }
+}

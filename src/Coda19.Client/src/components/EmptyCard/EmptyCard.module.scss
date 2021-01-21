@@ -1,0 +1,12 @@
+@import 'shared/colors.scss';
+@import 'shared/mixins.scss';
+
+.card {
+  @include flexCenterColumn;
+
+  :global(.MuiCard-root) {
+    width: 80vw;
+    height: 27em;
+    transform: translateY(-50%);
+  }
+}
