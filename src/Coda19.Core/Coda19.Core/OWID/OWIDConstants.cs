@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Coda19.Reader
+namespace Coda19.Core.OWID
 {
     public static class OWIDConstants
     {
@@ -13,5 +13,8 @@ namespace Coda19.Reader
         public const string EventsPrefix = "event";
         public const string LocationPrefix = "loc";
         public const string DatePrefix = "date";
+
+        public const string LocationLink = nameof(LocationLink); 
+        public const string DateLink = nameof(DateLink);
     }
 }

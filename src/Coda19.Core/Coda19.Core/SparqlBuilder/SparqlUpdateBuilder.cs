@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Coda19.Core.SparqlRunner;
 using VDS.RDF;
 using VDS.RDF.Nodes;
 
-namespace Coda19.Reader
+namespace Coda19.Core.SparqlBuilder
 {
     public sealed class SparqlUpdateBuilder
     {
-        private readonly List<Triple> triples = new List<Triple>();
+        private readonly List<Triple> triples = new();
         private readonly IGraph _graph;
 
         private INode _subject;
@@ -62,6 +64,18 @@ namespace Coda19.Reader
             return this;
         }
 
-        public IEnumerable<Triple> Get() => triples;
+        public SparqlUpdateBuilder AddLiteralTriple(string predicate, DateTime? value)
+        {
+            if (value.HasValue)
+            {
+                triples.Add(new Triple(_subject, _graph.CreateUriNode(predicate), new DateNode(_graph, value.Value)));
+            }
+
+            return this;
+        }
+
+        public ISparqlCommandRunner Get() => new SparqlCommandRunner(triples);
+
+        public IEnumerable<Triple> GetTriples() => triples;
     }
 }

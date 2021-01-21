@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coda19.Core", "Coda19.Core\Coda19.Core.csproj", "{E0DD048B-60AE-4AC4-857F-AC146334CCD9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Coda19.Core.UnitTests", "Coda19.Core.UnitTests\Coda19.Core.UnitTests.csproj", "{398C5EEF-8C3A-45C0-A2A0-FB8BA732E75D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0DD048B-60AE-4AC4-857F-AC146334CCD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0DD048B-60AE-4AC4-857F-AC146334CCD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0DD048B-60AE-4AC4-857F-AC146334CCD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0DD048B-60AE-4AC4-857F-AC146334CCD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{398C5EEF-8C3A-45C0-A2A0-FB8BA732E75D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{398C5EEF-8C3A-45C0-A2A0-FB8BA732E75D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{398C5EEF-8C3A-45C0-A2A0-FB8BA732E75D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{398C5EEF-8C3A-45C0-A2A0-FB8BA732E75D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C5BF987-DF91-49E6-B92D-6BEF0E4E1776}
+	EndGlobalSection
+EndGlobal
