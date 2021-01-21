@@ -7,6 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 
 import ResponsiveDrawer from 'components/ResponsiveDrawer';
+import Navbar from 'components/Navbar';
+
 import PropTypes from 'prop-types';
 
 const AppBar = ({ pagesList }) => {
@@ -28,6 +30,9 @@ const AppBar = ({ pagesList }) => {
             >
               <MenuIcon />
             </IconButton>
+          </Hidden>
+          <Hidden xsDown>
+            <Navbar />
           </Hidden>
         </Toolbar>
       </MaterialAppBar>

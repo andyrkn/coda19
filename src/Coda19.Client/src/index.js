@@ -5,11 +5,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import 'index.scss';
 import App from 'pages/App/App';
+import { HeaderProvider } from 'shared/header-context';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <HeaderProvider>
+        <App />
+      </HeaderProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

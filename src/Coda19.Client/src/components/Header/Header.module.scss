@@ -18,7 +18,10 @@
     @include flexCenterColumn;
 
     .title {
-      margin-top: 4.5em;
+      margin-top: 1.5em;
+      width: 8em;
+
+      text-align: center;
     }
 
     .description {

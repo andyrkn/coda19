@@ -1,25 +1,23 @@
 import React, { useEffect } from 'react';
 
-import EmptyCard from 'components/EmptyCard';
+import EmptyCard from 'components/EmptyCard/EmptyCard';
 
 import { useHeaderDispatch } from 'shared/header-context';
 import { PAGES } from 'shared/constants';
 
-import homeStyles from './Home.module.scss';
-
-const Home = () => {
+const History = () => {
   const headerDispatch = useHeaderDispatch();
 
   useEffect(() => {
-    headerDispatch({ type: PAGES.HOME });
+    headerDispatch({ type: PAGES.HISTORY });
   }, []);
 
   return (
-    <section className={homeStyles.container}>
+    <section>
       <EmptyCard />
-      <p>Hello there everybody</p>
+      <p>hello!</p>
     </section>
   );
 };
 
-export default Home;
+export default History;
