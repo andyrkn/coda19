@@ -1,19 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>b7df18f9-afda-4424-986e-4ae8027e94a9</UserSecretsId>
+    <UserSecretsId>97810854-7b43-4b9b-88e5-d4d309ab8f02</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Coda19.Evolution.Business\Coda19.Evolution.Business.csproj" />
+    <ProjectReference Include="..\..\Coda19.Core\Coda19.Core\Coda19.Core.csproj" />
   </ItemGroup>
 
 </Project>

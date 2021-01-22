@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Coda19.Core.OWID;
-using Coda19.Core.SparqlRunner;
 
 namespace Coda19.Core.SparqlBuilder
 {

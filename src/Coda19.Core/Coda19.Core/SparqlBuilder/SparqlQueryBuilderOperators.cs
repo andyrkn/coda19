@@ -32,5 +32,12 @@ namespace Coda19.Core.SparqlBuilder
             _orderBy = $"ORDER BY {(desc ? $"DESC(?{subject})" : $"?{subject}")}\r\n";
             return this;
         }
+
+        public SparqlQueryBuilder Paginate(int skip, int take)
+        {
+            _skip = skip;
+            _take = take;
+            return this;
+        }
     }
 }

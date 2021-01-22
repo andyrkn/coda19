@@ -22,13 +22,24 @@ namespace Coda19.Core.SparqlRunner
             _take = take;
         }
 
-        public async Task<PaginatedList<T>> Run<T>()
+        public async Task<string> RunRaw()
         {
             try
             {
                 var result = await Task.Run(() => endpoint.QueryWithResultSet(_query));
-                var end =
-                    $"[{string.Join(",", result.Select(resultSet => $"{{{string.Join(",", resultSet.Select(pair => $"\"{pair.Key}\":\"{pair.Value}\""))}}}"))}]";
+                return $"[{string.Join(",", result.Select(resultSet => $"{{{string.Join(",", resultSet.Select(pair => $"\"{pair.Key}\":\"{pair.Value}\""))}}}"))}]";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(_query, ex);
+            }
+        }
+
+        public async Task<PaginatedList<T>> Run<T>()
+        {
+            try
+            {
+                var end = await RunRaw();
                 var results = JsonConvert.DeserializeObject<IList<T>>(end);
                 var page = _skip == 0 ? 0 : _skip / _take;
 
