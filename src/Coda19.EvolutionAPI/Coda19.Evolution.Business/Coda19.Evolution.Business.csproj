@@ -13,8 +13,4 @@
     <ProjectReference Include="..\..\Coda19.Core\Coda19.Core\Coda19.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="GetFatalities\" />
-  </ItemGroup>
-
 </Project>
