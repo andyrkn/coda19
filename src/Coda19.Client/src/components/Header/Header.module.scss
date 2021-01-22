@@ -2,11 +2,16 @@
 @import 'shared/colors.scss';
 
 .container {
-  height: 70vh;
+  height: 80vh;
 
   background-color: $venice-blue;
 
   color: $white;
+
+  :global(.MuiGrid-container) {
+    height: 67vh;
+    text-align: center;
+  }
 
   :global(.MuiAppBar-root) {
     box-shadow: none;

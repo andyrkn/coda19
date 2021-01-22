@@ -3,7 +3,9 @@ import { Helmet } from 'react-helmet';
 
 import { ReactComponent as CenterSvg } from 'images/virus.svg';
 import { ReactComponent as TopRightSvg } from 'images/halfVirus.svg';
+import { ReactComponent as BigLogoSvg } from 'images/bigLogo.svg';
 
+import { Grid, Hidden } from '@material-ui/core';
 import AppBar from 'components/AppBar';
 import PropTypes from 'prop-types';
 
@@ -18,13 +20,39 @@ const Header = ({ title, description }) => (
       <meta name="description" content={description} />
     </Helmet>
     <AppBar pagesList={pagesList} />
-    <div className={headerStyles.textWrapper}>
-      <h1 className={headerStyles.title}>{title}</h1>
-      <p className={headerStyles.description}>{description}</p>
-    </div>
+    <Hidden smUp>
+      <div className={headerStyles.textWrapper}>
+        <h2 className={headerStyles.title}>{title}</h2>
+        <p className={headerStyles.description}>{description}</p>
+      </div>
+    </Hidden>
 
-    <TopRightSvg className={headerStyles.topRightSvg} />
-    <CenterSvg className={headerStyles.centerSvg} />
+    <Hidden xsDown>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="center"
+        spacing={2}
+      >
+        <Grid xs={5}>
+          <Grid item>
+            <h2 className={headerStyles.title}>{title}</h2>
+          </Grid>
+          <Grid item>
+            <p className={headerStyles.description}>{description}</p>
+          </Grid>
+        </Grid>
+        <Grid item xs={5}>
+          <BigLogoSvg className={headerStyles.bigLogo} />
+        </Grid>
+      </Grid>
+    </Hidden>
+
+    <Hidden smUp>
+      <TopRightSvg className={headerStyles.topRightSvg} />
+      <CenterSvg className={headerStyles.centerSvg} />
+    </Hidden>
   </div>
 );
 export default Header;

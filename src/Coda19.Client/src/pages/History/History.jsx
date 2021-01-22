@@ -15,7 +15,7 @@ const History = () => {
   return (
     <section>
       <EmptyCard />
-      <p>hello!</p>
+      <p>Hello!</p>
     </section>
   );
 };

@@ -1,1 +1,10 @@
-
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  :global(.MuiGrid-root) {
+    width: 90vw;
+    // display: flex;
+  }
+}

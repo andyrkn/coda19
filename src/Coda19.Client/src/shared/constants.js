@@ -7,7 +7,6 @@ export const PAGES = {
   SYMPTOMS: 'SYMPTOMS',
   PROTECTION: 'PROTECTION',
   PREDICTION: 'PREDICTION',
-  ABOUT: 'ABOUT US',
 };
 
 export const HEADER = {
@@ -46,9 +45,7 @@ export const HEADER = {
     description:
       'The Coronavirus (COVID-19) was first reported in Wuhan, Hubei, China in December 2019, the outbreak was later recognized as a pandemic by the World Health Organization (WHO) on 11 March 2020.',
   },
-  ABOUT: {
-    title: 'About Us',
-    description:
-      'The Coronavirus (COVID-19) was first reported in Wuhan, Hubei, China in December 2019, the outbreak was later recognized as a pandemic by the World Health Organization (WHO) on 11 March 2020.',
-  },
 };
+
+export const lorem =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';

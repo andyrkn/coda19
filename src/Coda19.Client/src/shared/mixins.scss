@@ -53,3 +53,8 @@
   align-items: center;
   flex-direction: column;
 }
+
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+}

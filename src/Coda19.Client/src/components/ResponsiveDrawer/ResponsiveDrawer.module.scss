@@ -15,6 +15,10 @@
     background-color: $divider-white;
   }
 
+  :global(.Mui-selected) {
+    color: $winter-sky-rose;
+  }
+
   .logoSvg {
     position: absolute;
     right: 0;

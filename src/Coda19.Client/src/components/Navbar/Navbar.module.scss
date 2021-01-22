@@ -1,8 +1,22 @@
-.container {
-  background-color: red;
-  width: 100vw;
+@import 'shared/colors.scss';
+@import 'shared/mixins.scss';
 
-  display: flex;
-  flex-direction: row;
+.container {
+  width: 100vw;
+  height: 8vh;
+  border-bottom: 0.5px solid $blue-bell;
+
+  @include flexRow;
   justify-content: space-between;
+  align-items: center;
+
+  :global(.MuiButton-root) {
+    text-transform: none;
+  }
+}
+
+.activeLink {
+  a {
+    color: $winter-sky-rose;
+  }
 }
