@@ -6,30 +6,8 @@ using Coda19.Core.SparqlRunner;
 
 namespace Coda19.Core.SparqlBuilder
 {
-    public sealed class SparqlQueryBuilder
+    public partial class SparqlQueryBuilder
     {
-        private int _skip = 0;
-        private int _take = 100;
-
-        private readonly StringBuilder _sb = new StringBuilder();
-        private IList<string> _prefixes = new List<string>();
-        private readonly IList<string> _subjects = new List<string>();
-        private readonly string _subject = "?any";
-        private readonly string _prefix;
-
-        public SparqlQueryBuilder(string prefix)
-        {
-            _prefix = prefix;
-            _subjects.Add($" {_subject}");
-        }
-
-        public SparqlQueryBuilder(string prefix, string subject)
-        {
-            _prefix = prefix;
-            _subject = $"?{subject}";
-            _subjects.Add($" {_subject}");
-        }
-
         public SparqlQueryBuilder AddOWidPrefixes()
         {
             _prefixes.Add($"PREFIX {OWIDConstants.DatePrefix}:<{OWIDConstants.DateUri}>");
@@ -44,7 +22,32 @@ namespace Coda19.Core.SparqlBuilder
             return this;
         }
 
-        public SparqlQueryBuilder IncludeLiteral(string literal) => AddLiteral(literal, literal);
+        public SparqlQueryBuilder UseSubject(string subject)
+        {
+            _subject = $"?{subject}";
+            return this;
+        }
+
+        public SparqlQueryBuilder AddSubject(string subject)
+        {
+            _subjects.Add($" ?{subject}");
+            return this;
+        }
+
+        public SparqlQueryBuilder AddDefaultSubject()
+        {
+            _subjects.Add(" ?any");
+            return this;
+        }
+
+        public SparqlQueryBuilder UseDefaultSubject()
+        {
+            _subject = "?any";
+            return this;
+        }
+
+        public SparqlQueryBuilder AddLiteral(string literal) 
+            => AddLiteral(literal, literal);
 
         public SparqlQueryBuilder AddLiteral(string literal, string predicate)
         {
@@ -57,6 +60,12 @@ namespace Coda19.Core.SparqlBuilder
             return this;
         }
 
+        public SparqlQueryBuilder UseLiteral(string literal)
+        {
+            _sb.AppendLine($"{_subject} {_prefix}:{literal} ?{literal} .");
+            return this;
+        }
+
         public SparqlQueryBuilder AddValuedLiteral(string literal, string predicate, string value)
         {
             if (literal != null && value != null)
@@ -64,6 +73,12 @@ namespace Coda19.Core.SparqlBuilder
                 _sb.AppendLine($"{_subject} {_prefix}:{predicate} \"{value}\" .");
             }
 
+            return this;
+        }
+
+        public SparqlQueryBuilder AddTriple(string triple)
+        {
+            _sb.AppendLine(triple);
             return this;
         }
 
@@ -96,14 +111,11 @@ namespace Coda19.Core.SparqlBuilder
 
             return this;
         }
-        
-        public ISparqlQueryRunner Build()
-        {
-            var prefixes = $"{string.Join("\r\n", _prefixes)}\r\n";
-            var select = $"SELECT{string.Join(string.Empty, _subjects)}\r\nWHERE {{\r\n";
-            var clauses = _sb.ToString();
-            return new SparqlQueryRunner($"{prefixes}{select}{clauses}}}\r\nLIMIT {_take}\r\nOFFSET {_skip}", _skip, _take);
-        }
 
+        public SparqlQueryBuilder AddLink(string link, string prefix, string predicate, string linkValue)
+        {
+            _sb.AppendLine($"{_subject} {_prefix}:{link} [{prefix}:{predicate} ?{linkValue}] .");
+            return this;
+        }
     }
 }

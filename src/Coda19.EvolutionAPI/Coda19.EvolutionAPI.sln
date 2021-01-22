@@ -1,18 +1,31 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coda19.EvolutionAPI", "Coda19.EvolutionAPI\Coda19.EvolutionAPI.csproj", "{117B33BC-0456-467D-8879-01FC7C442B9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coda19.Evolution.Business", "Coda19.Evolution.Business\Coda19.Evolution.Business.csproj", "{F9E577C6-8A89-437A-9DDA-C87DC8D53570}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
-		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{117B33BC-0456-467D-8879-01FC7C442B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{117B33BC-0456-467D-8879-01FC7C442B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{117B33BC-0456-467D-8879-01FC7C442B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{117B33BC-0456-467D-8879-01FC7C442B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9E577C6-8A89-437A-9DDA-C87DC8D53570}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9E577C6-8A89-437A-9DDA-C87DC8D53570}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9E577C6-8A89-437A-9DDA-C87DC8D53570}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9E577C6-8A89-437A-9DDA-C87DC8D53570}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63617902-B65B-44C6-BAB2-A89050A0826A}
 	EndGlobalSection
 EndGlobal
