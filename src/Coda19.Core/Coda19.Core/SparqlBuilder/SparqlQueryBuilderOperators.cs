@@ -21,6 +21,20 @@ namespace Coda19.Core.SparqlBuilder
             return this;
         }
 
+        public SparqlQueryBuilder FilterGreaterThanAndEqual(string greaterSubject, string equalitySubject, DateTime? value, string country)
+        {
+            if (value.HasValue)
+            {
+                _sb.AppendLine($"FILTER (?{greaterSubject} > \"{value.Value:yyyy-MM-dd}\"^^xsd:date && ?{equalitySubject} = \"{country}\") .");
+            } 
+            else
+            {
+                _sb.AppendLine($"FILTER (?{equalitySubject} = \"{country}\") .");
+            }
+
+            return this;
+        }
+
         public SparqlQueryBuilder GroupBy(string subject)
         {
             _groupBy = $"GROUP BY ?{subject}\r\n";
