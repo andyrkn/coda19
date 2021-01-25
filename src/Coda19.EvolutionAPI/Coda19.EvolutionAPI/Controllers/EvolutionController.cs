@@ -28,6 +28,12 @@ namespace Coda19.EvolutionAPI.Controllers
             return Ok(await _mediator.Send(command));
         }
 
+        [HttpGet("/totalCases")]
+        public async Task<IActionResult> GetTotalCases([FromQuery] GetTotalCasesQuery command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
         [HttpGet("/country/fatalities")]
         public Task GetGlobal()
         {
