@@ -17,7 +17,19 @@ namespace Coda19.EvolutionAPI.Controllers
         }
 
         [HttpGet("/country/rank")]
-        public async Task<IActionResult> Get([FromQuery] GetNewCasesSince command)
+        public async Task<IActionResult> Get([FromQuery] GetNewCasesQuery command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [HttpGet("/country/cases")]
+        public async Task<IActionResult> GetCasesByCountry([FromQuery] GetCasesByCountryQuery command)
+        {
+            return Ok(await _mediator.Send(command));
+        }
+
+        [HttpGet("/totalCases")]
+        public async Task<IActionResult> GetTotalCases([FromQuery] GetTotalCasesQuery command)
         {
             return Ok(await _mediator.Send(command));
         }

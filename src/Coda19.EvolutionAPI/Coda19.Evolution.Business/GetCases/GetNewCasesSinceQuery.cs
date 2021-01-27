@@ -7,14 +7,14 @@ using MediatR;
 
 namespace Coda19.Evolution.Business.GetCases
 {
-    public sealed class GetNewCasesSince: GetFilterModel, IRequest<string>
+    public sealed class GetNewCasesQuery: GetFilterModel, IRequest<string>
     {
         public DateTime? StartDate { get; set; }
     }
 
-    internal sealed class GetNewCasesSinceCommandHandler : IRequestHandler<GetNewCasesSince, string>
+    internal sealed class GetNewCasesSinceCommandHandler : IRequestHandler<GetNewCasesQuery, string>
     {
-        public Task<string> Handle(GetNewCasesSince request, CancellationToken cancellationToken)
+        public Task<string> Handle(GetNewCasesQuery request, CancellationToken cancellationToken)
         {
             request.StartDate ??= new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
