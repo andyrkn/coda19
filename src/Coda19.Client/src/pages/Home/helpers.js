@@ -1,17 +1,23 @@
 export const prepareGlobalCases = (data) => {
-  const keys = Object.keys(data[0]);
-  const preparedData = {
-    keys: keys
-      .filter((key) => key !== 'Date')
-      .map((key) => key.replace(/([A-Z])/g, ' $1').trim()),
+  console.log('hhelpers', data);
+  if (data.length > 0) {
+    const keys = Object.keys(data[0]);
+    const preparedData = {
+      keys: keys
+        .filter((key) => key !== 'Date')
+        .map((key) => key.replace(/([A-Z])/g, ' $1').trim()),
 
-    entries: data.map((entry) => ({
-      date: entry.Date,
-      'New Cases': parseInt(entry.NewCases, 10),
-    })),
-  };
+      entries: data.map((entry) => ({
+        date: entry.Date,
+        'New Cases': parseInt(entry.NewCases, 10),
+      })),
+    };
 
-  return preparedData;
+    return preparedData;
+  }
+
+  return [];
+
 };
 
 export const prepareGlobalTests = (data) => {

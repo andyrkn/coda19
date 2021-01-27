@@ -2,63 +2,45 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import React, { useContext, useEffect, useState } from 'react';
-
-import {
-  AppBar,
-  Box,
-  Grid,
-  Hidden,
-  Paper,
-  Tab,
-  Tabs,
-  Typography,
-  useMediaQuery,
-} from '@material-ui/core';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
-import Map from 'components/Map';
-import TabPanel from 'components/TabPanel';
-import CountrySelector from 'components/CountrySelector';
+import { AppBar, Hidden, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import axios from 'axios';
 import LineChart from 'charts/LineChart';
-import BarChart from 'charts/BarChart';
-import ScatterChart from 'charts/ScatterChart';
-
-import { useHeaderDispatch } from 'contexts/header-context';
-import { CountryContext } from 'contexts/country-context';
+import CountrySelector from 'components/CountrySelector';
+import TabPanel from 'components/TabPanel';
 import { ApiContext } from 'contexts/api-context';
-import { lorem, PAGES } from 'shared/constants';
+import { CountryContext } from 'contexts/country-context';
+import { useHeaderDispatch } from 'contexts/header-context';
+import React, { useContext, useEffect, useState } from 'react';
+import { PAGES } from 'shared/constants';
 
-import {
-  prepareGlobalCases,
-  prepareGlobalTests,
-  prepareGlobalDeaths,
-} from './helpers';
-
-import {
-  casesData,
-  sarsData,
-  vaccinationData,
-  hospitalizationData,
-  dailyTestsData,
-  globalCases,
-  globalTests,
-  globalDeaths,
-} from './constants';
+import { dailyTestsData, globalDeaths, globalTests } from './constants';
+import { prepareGlobalCases, prepareGlobalDeaths, prepareGlobalTests } from './helpers';
 import homeStyles from './Home.module.scss';
 
 const Home = () => {
   const headerDispatch = useHeaderDispatch();
   const country = useContext(CountryContext);
-  const api = useContext(getApiContext);
+  const api = useContext(ApiContext);
   const [selectedDate, setSelectedDate] = useState(
     new Date('2020-08-18T21:11:54')
   );
   const [value, setValue] = useState(0);
+  const [globalCases, setGlobalCases] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://localhost:5010/api/evolution/Global/cases?StartDate=${selectedDate.toISOString()}`
+      )
+      .then((res) => {
+        const { data } = res;
+        // api.setGlobalCases({ data });
+        console.log(data);
+        setGlobalCases(data);
+      });
+  }, [selectedDate]);
 
   useEffect(() => {
     console.log(country);
