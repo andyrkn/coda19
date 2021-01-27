@@ -10,5 +10,8 @@
         "paths": ["src"]
       }
     }
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }

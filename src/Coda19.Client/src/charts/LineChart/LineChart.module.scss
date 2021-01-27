@@ -1,0 +1,20 @@
+// @import 'static/scss/_colors.scss';
+
+.chartContainer {
+  padding-top: 30px;
+
+  :global(.recharts-default-legend) {
+    transform: translateY(1.2em);
+  }
+
+  :global(.recharts-legend-wrapper) {
+    position: relative !important;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+}
+
+.checkbox {
+  margin-left: 25px;
+}

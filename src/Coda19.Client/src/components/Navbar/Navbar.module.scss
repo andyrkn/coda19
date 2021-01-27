@@ -1,9 +1,9 @@
-@import 'shared/colors.scss';
-@import 'shared/mixins.scss';
+@import 'styles/colors.scss';
+@import 'styles/mixins.scss';
 
 .container {
-  width: 100vw;
-  height: 8vh;
+  width: 90vw;
+  height: 4em;
   border-bottom: 0.5px solid $blue-bell;
 
   @include flexRow;

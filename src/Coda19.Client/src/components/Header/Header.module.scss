@@ -1,37 +1,28 @@
-@import 'shared/mixins.scss';
-@import 'shared/colors.scss';
+@import 'styles/mixins.scss';
+@import 'styles/colors.scss';
 
 .container {
-  height: 80vh;
+  height: 31em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
   background-color: $venice-blue;
 
   color: $white;
 
   :global(.MuiGrid-container) {
-    height: 67vh;
     text-align: center;
   }
 
   :global(.MuiAppBar-root) {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     box-shadow: none;
 
     background-color: inherit;
-  }
-
-  .textWrapper {
-    @include flexCenterColumn;
-
-    .title {
-      margin-top: 1.5em;
-      width: 8em;
-
-      text-align: center;
-    }
-
-    .description {
-      font-weight: 100;
-    }
   }
 
   .topRightSvg,
@@ -44,5 +35,11 @@
 
     margin-top: 35vh;
     margin-right: 25vw;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    height: 37em;
   }
 }

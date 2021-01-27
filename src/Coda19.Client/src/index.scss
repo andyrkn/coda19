@@ -1,7 +1,7 @@
 @import 'styles/variable.scss';
 @import 'styles/reset.scss';
-@import 'shared/mixins.scss';
-@import 'shared/fonts.scss';
+@import 'styles/mixins.scss';
+@import 'styles/fonts.scss';
 
 html {
   @include interpolate(font-size, 320px, 1920px, 16px, 22px);

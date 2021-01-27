@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import EmptyCard from 'components/EmptyCard/EmptyCard';
 
-import { useHeaderDispatch } from 'shared/header-context';
+import { useHeaderDispatch } from 'contexts/header-context';
 import { PAGES } from 'shared/constants';
 
 const History = () => {

@@ -21,6 +21,7 @@ import navbarStyles from './Navbar.module.scss';
 const getLinkTo = (page, loc) => (
   <Button
     className={loc === `/${page.toLowerCase()}` ? navbarStyles.activeLink : ''}
+    key={page}
     variant="text"
     color="inherit"
   >
