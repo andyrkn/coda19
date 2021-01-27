@@ -15,6 +15,7 @@ namespace Coda19.Reader
             switch (Convert.ToInt32(args[0]))
             {
                 case 1: await new OurWorldInData(args[1]).Read(); break;
+                case 2: await new TipsData(args[1]).Read(); break;
                 default:break;
             }
         }

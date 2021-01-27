@@ -38,7 +38,7 @@ namespace Coda19.Core.SparqlBuilder
         {
             if (value != null)
             {
-                triples.Add(new Triple(_subject, _graph.CreateUriNode(predicate), _graph.CreateLiteralNode(value)));
+                triples.Add(new Triple(_subject, _graph.CreateUriNode(predicate), new StringNode(_graph, value)));
             }
 
             return this;
@@ -50,6 +50,7 @@ namespace Coda19.Core.SparqlBuilder
             {
                 triples.Add(new Triple(_subject, _graph.CreateUriNode(predicate), new DecimalNode(_graph, value.Value)));
             }
+
 
             return this;
         }
