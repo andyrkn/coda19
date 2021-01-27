@@ -1,25 +1,22 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Coda19.Core.OWID;
-using Coda19.Core.SparqlBuilder;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Coda19.Core.OWID;
+using Coda19.Core.SparqlBuilder;
+using MediatR;
 
-namespace Coda19.Evolution.Business.GetCases
+namespace Coda19.Evolution.Business.Country
 {
-    public sealed class GetCasesByCountryQuery: GetFilterModel, IRequest<string>
+    public sealed class GetTestsByCountryQuery: GetFilterModel, IRequest<string>
     {
         public DateTime? StartDate { get; set; }
 
         public string Country { get; set; }
     }
 
-    internal sealed class GetCasesByCountryCommandHandler : IRequestHandler<GetCasesByCountryQuery, string>
+    internal sealed class GetTestsByCountryCommandHandler : IRequestHandler<GetTestsByCountryQuery, string>
     {
-        public Task<string> Handle(GetCasesByCountryQuery request, CancellationToken cancellationToken)
+        public Task<string> Handle(GetTestsByCountryQuery request, CancellationToken cancellationToken)
         {
             request.StartDate ??= new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
@@ -27,14 +24,10 @@ namespace Coda19.Evolution.Business.GetCases
                 .AddOWidPrefixes()
                 .AddSubject(nameof(CountryModel.Location))
                 .AddSubject(nameof(DayModel.Date))
-                .AddSubject(nameof(DayModel.TotalCases))
-                .AddSubject(nameof(DayModel.TotalTests))
-                .AddSubject(nameof(DayModel.TotalDeaths))
+                .AddSubject(nameof(DayModel.NewTests))
                 .UseLiteral(nameof(DayModel.Date))
                 .UseLiteral(nameof(CountryModel.Location))
-                .UseLiteral(nameof(DayModel.TotalCases))
-                .UseLiteral(nameof(DayModel.TotalTests))
-                .UseLiteral(nameof(DayModel.TotalDeaths))
+                .UseLiteral(nameof(DayModel.NewTests))
                 .FilterGreaterThanAndEqual(nameof(DayModel.Date), nameof(CountryModel.Location), request.StartDate, request.Country)
                 .Paginate(request.PageIndex * request.PageSize, request.PageSize)
                 .Build()

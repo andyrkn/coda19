@@ -1,11 +1,10 @@
-﻿using MediatR;
-using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Coda19.Core.OWID;
 using Coda19.Core.SparqlBuilder;
-using System.Threading;
-using System.Threading.Tasks;
+using MediatR;
 
-namespace Coda19.Evolution.Business.GetCases
+namespace Coda19.Evolution.Business
 {
     public sealed class GetTotalCasesQuery: GetFilterModel, IRequest<string>
     {
