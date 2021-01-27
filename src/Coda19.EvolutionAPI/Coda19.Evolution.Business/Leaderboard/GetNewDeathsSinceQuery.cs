@@ -5,16 +5,16 @@ using Coda19.Core.OWID;
 using Coda19.Core.SparqlBuilder;
 using MediatR;
 
-namespace Coda19.Evolution.Business.GetCases
+namespace Coda19.Evolution.Business.Leaderboard
 {
-    public sealed class GetNewCasesQuery: GetFilterModel, IRequest<string>
+    public sealed class GetNewDeathsQuery: GetFilterModel, IRequest<string>
     {
         public DateTime? StartDate { get; set; }
     }
 
-    internal sealed class GetNewCasesSinceCommandHandler : IRequestHandler<GetNewCasesQuery, string>
+    internal sealed class GetNewDeathsSinceQueryHandler : IRequestHandler<GetNewDeathsQuery, string>
     {
-        public Task<string> Handle(GetNewCasesQuery request, CancellationToken cancellationToken)
+        public Task<string> Handle(GetNewDeathsQuery request, CancellationToken cancellationToken)
         {
             request.StartDate ??= new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
@@ -22,12 +22,12 @@ namespace Coda19.Evolution.Business.GetCases
                 .AddOWidPrefixes()
                 .AddSubject(nameof(CountryModel.Location))
                 .UseDefaultSubject()
-                .Sum(nameof(DayModel.NewCases))
+                .Sum(nameof(DayModel.NewDeaths))
                 .UseLiteral(nameof(DayModel.Date))
                 .AddLink(OWIDConstants.LocationLink, OWIDConstants.LocationPrefix, nameof(CountryModel.Continent), nameof(CountryModel.Continent))
                 .AddLink(OWIDConstants.LocationLink, OWIDConstants.LocationPrefix, nameof(CountryModel.Location), nameof(CountryModel.Location))
                 .FilterGreaterThan(nameof(DayModel.Date), request.StartDate)
-                .OrderBy(nameof(DayModel.NewCases), true)
+                .OrderBy(nameof(DayModel.NewDeaths), true)
                 .GroupBy(nameof(CountryModel.Location))
                 .Paginate(request.PageIndex*request.PageSize, request.PageSize)
                 .Build()
