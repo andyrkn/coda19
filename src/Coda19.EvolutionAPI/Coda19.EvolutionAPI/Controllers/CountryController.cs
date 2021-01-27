@@ -7,7 +7,7 @@ using MediatR;
 namespace Coda19.EvolutionAPI.Controllers
 {
     [ApiController]
-    [Route("api/evolution/[controller]")]
+    [Route("api/evolution/[controller]/")]
     public sealed class CountryController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,13 +17,13 @@ namespace Coda19.EvolutionAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("/country/cases")]
+        [HttpGet("cases")]
         public async Task<IActionResult> Get([FromQuery] GetCasesByCountryQuery command) => Ok(await _mediator.Send(command));
 
-        [HttpGet("/country/deaths")]
+        [HttpGet("deaths")]
         public async Task<IActionResult> Get([FromQuery] GetDeathsByCountryQuery command) => Ok(await _mediator.Send(command));
 
-        [HttpGet("/country/tests")]
+        [HttpGet("tests")]
         public async Task<IActionResult> Get([FromQuery] GetTestsByCountryQuery command) => Ok(await _mediator.Send(command));
     }
 }

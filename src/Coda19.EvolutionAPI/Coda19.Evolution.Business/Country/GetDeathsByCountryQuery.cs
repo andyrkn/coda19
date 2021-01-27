@@ -14,7 +14,7 @@ namespace Coda19.Evolution.Business.Country
         public string Country { get; set; }
     }
 
-    internal sealed class GetDeathsByCountryCommandHandler : IRequestHandler<GetDeathsByCountryQuery, string>
+    internal sealed class GetDeathsByCountryQueryHandler : IRequestHandler<GetDeathsByCountryQuery, string>
     {
         public Task<string> Handle(GetDeathsByCountryQuery request, CancellationToken cancellationToken)
         {
@@ -22,12 +22,9 @@ namespace Coda19.Evolution.Business.Country
 
             return new SparqlQueryBuilder(OWIDConstants.EventsPrefix)
                 .AddOWidPrefixes()
-                .AddSubject(nameof(CountryModel.Location))
-                .AddSubject(nameof(DayModel.Date))
-                .AddSubject(nameof(DayModel.NewDeaths))
-                .UseLiteral(nameof(DayModel.Date))
-                .UseLiteral(nameof(CountryModel.Location))
-                .UseLiteral(nameof(DayModel.NewDeaths))
+                .AddLiteral(nameof(DayModel.Date))
+                .AddLiteral(nameof(CountryModel.Location))
+                .AddLiteral(nameof(DayModel.NewDeaths))
                 .FilterGreaterThanAndEqual(nameof(DayModel.Date), nameof(CountryModel.Location), request.StartDate, request.Country)
                 .Paginate(request.PageIndex * request.PageSize, request.PageSize)
                 .Build()

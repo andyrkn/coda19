@@ -12,7 +12,7 @@ namespace Coda19.Evolution.Business.Leaderboard
         public DateTime? StartDate { get; set; }
     }
 
-    internal sealed class GetNewDeathsSinceCommandHandler : IRequestHandler<GetNewDeathsQuery, string>
+    internal sealed class GetNewDeathsSinceQueryHandler : IRequestHandler<GetNewDeathsQuery, string>
     {
         public Task<string> Handle(GetNewDeathsQuery request, CancellationToken cancellationToken)
         {

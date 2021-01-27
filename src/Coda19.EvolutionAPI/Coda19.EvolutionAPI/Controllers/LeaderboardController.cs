@@ -6,7 +6,7 @@ using MediatR;
 namespace Coda19.EvolutionAPI.Controllers
 {
     [ApiController]
-    [Route("api/evolution/[controller]")]
+    [Route("api/evolution/[controller]/")]
     public sealed class LeaderboardController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -16,13 +16,13 @@ namespace Coda19.EvolutionAPI.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("/leaderboard/cases")]
+        [HttpGet("cases")]
         public async Task<IActionResult> Get([FromQuery] GetNewCasesQuery command) => Ok(await _mediator.Send(command));
 
-        [HttpGet("/leaderboard/deaths")]
+        [HttpGet("deaths")]
         public async Task<IActionResult> Get([FromQuery] GetNewDeathsQuery command) => Ok(await _mediator.Send(command));
 
-        [HttpGet("/leaderboard/tests")]
+        [HttpGet("tests")]
         public async Task<IActionResult> Get([FromQuery] GetNewTestsQuery command) => Ok(await _mediator.Send(command));
     }
 }
