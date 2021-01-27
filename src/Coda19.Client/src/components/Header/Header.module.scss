@@ -2,7 +2,6 @@
 @import 'styles/colors.scss';
 
 .container {
-  height: 31em;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -32,18 +31,5 @@
 
   .centerSvg {
     transform: scale(1.5);
-
-    margin-top: 35vh;
-    margin-right: 25vw;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .container {
-    height: 37em;
-  }
-
-  .historyMainTitle {
-    transform: translateY(2.5em);
   }
 }

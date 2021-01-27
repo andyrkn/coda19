@@ -7,13 +7,16 @@ import 'index.scss';
 import App from 'pages/App/App';
 import { HeaderProvider } from 'contexts/header-context';
 import { CountryProvider } from 'contexts/country-context';
+import { ApiProvider } from 'contexts/api-context';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <HeaderProvider>
         <CountryProvider>
-          <App />
+          <ApiProvider>
+            <App />
+          </ApiProvider>
         </CountryProvider>
       </HeaderProvider>
     </BrowserRouter>

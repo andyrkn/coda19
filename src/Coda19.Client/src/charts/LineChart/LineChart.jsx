@@ -36,14 +36,14 @@ const LineChart = ({ data, properties }) => {
         data={data?.entries}
         margin={{
           top: 5,
-          right: 30,
+          right: 20,
           left: 50,
           bottom: 30,
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis tickMargin={20} dataKey="date" />
-        <YAxis tickMargin={20} />
+        <XAxis tickMargin={20} minTickGap={25} dataKey="date" />
+        <YAxis tickMargin={20} preserveStartEnd />
         <Tooltip />
         <Legend />
         {data.keys.map((key, index) => (
