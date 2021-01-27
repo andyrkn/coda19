@@ -1,16 +1,17 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent } from '@material-ui/core';
 
 import emptyCardStyles from './EmptyCard.module.scss';
 
-const EmptyCard = () => (
-  <div className={emptyCardStyles.card}>
-    ]
+// eslint-disable-next-line react/prop-types
+const EmptyCard = ({ content }) => (
+  <div className={emptyCardStyles.container}>
     <Card>
       <CardContent>
-        <Typography color="textSecondary" gutterBottom>
+        {/* <Typography color="textSecondary" gutterBottom>
           Word of the Day
-        </Typography>
+        </Typography> */}
+        {content}
       </CardContent>
     </Card>
   </div>

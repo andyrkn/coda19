@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { HEADER, PAGES } from './constants';
+import { HEADER, PAGES } from 'shared/constants';
 
 const HeaderStateContext = createContext();
 const HeaderDispatchContext = createContext();

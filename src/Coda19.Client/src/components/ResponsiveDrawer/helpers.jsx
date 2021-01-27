@@ -33,6 +33,3 @@ export const getIcon = (title) => {
 
 export const getIsSelected = (text, path) =>
   !!path.includes(text.toLowerCase());
-
-export const upperFirstLetter = (string) =>
-  string[0].toUpperCase() + string.toLowerCase().slice(1);

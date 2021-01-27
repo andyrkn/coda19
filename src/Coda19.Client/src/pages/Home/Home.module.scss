@@ -1,1 +1,39 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1080px;
 
+  margin-top: 15em;
+  :global(.MuiGrid-root) {
+    max-width: 60em;
+  }
+
+  :global(.MuiPaper-elevation2) {
+    padding: 0.8em;
+    padding-bottom: 3em;
+  }
+
+  :global(.MuiGrid-root) {
+    margin-top: 0.5em;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .container {
+    margin-top: 20em;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 370px) {
+  .container {
+    margin-top: 17em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    margin-top: 3em;
+  }
+}

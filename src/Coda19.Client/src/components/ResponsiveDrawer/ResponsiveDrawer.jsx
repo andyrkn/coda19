@@ -13,7 +13,8 @@ import PropTypes from 'prop-types';
 
 import { ReactComponent as LogoSvg } from 'images/logo.svg';
 import { PAGES } from 'shared/constants';
-import { getIcon, getIsSelected, upperFirstLetter } from './helpers';
+import { upperFirstLetter } from 'shared/helpers';
+import { getIcon, getIsSelected } from './helpers';
 import drawerStyles from './ResponsiveDrawer.module.scss';
 
 const ResponsiveDrawer = ({ isOpen, handleDrawerToggle }) => {
