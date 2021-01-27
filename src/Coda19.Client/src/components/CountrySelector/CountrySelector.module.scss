@@ -1,3 +1,5 @@
 .container {
-  margin-right: 1em;
+  :global(.MuiInputBase-root) {
+    width: 254px;
+  }
 }

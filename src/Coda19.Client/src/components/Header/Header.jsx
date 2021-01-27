@@ -31,13 +31,7 @@ const Header = ({ title, description }) => {
         <CenterSvg className={headerStyles.centerSvg} />
       </Hidden>
 
-      <div
-        className={
-          location.pathname === '/history' ? headerStyles.historyMainTitle : ''
-        }
-      >
-        <MainTitle title={title} description={description} />
-      </div>
+      <MainTitle title={title} description={description} />
 
       {location.pathname === '/home' ? <Statistics /> : ''}
       {location.pathname === '/history' ? <ChinaMap /> : ''}
