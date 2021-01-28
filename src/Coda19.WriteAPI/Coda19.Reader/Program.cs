@@ -17,6 +17,7 @@ namespace Coda19.Reader
                 case 1: await new OurWorldInData(args[1]).Read(); break;
                 case 2: await new TipsData(args[1]).Read(); break;
                 case 3: await new SpreadData(args[1]).Read(); break;
+                case 4: await new SyptomData(args[1]).Read(); break;
                 default: break;
             }
         }
