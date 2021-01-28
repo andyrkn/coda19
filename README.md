@@ -13,3 +13,8 @@
 # http://evolution.coda19.ashbell-platform.com/swagger/index.html
 # http://prediction.coda19.ashbell-platform.com/swagger/index.html
 # http://support.coda19.ashbell-platform.com/swagger/index.html
+
+
+
+# User visual guide:
+https://wetransfer.com/downloads/c72b0c13f98211488c4a244d0bb4eb9420210128202922/00110c
