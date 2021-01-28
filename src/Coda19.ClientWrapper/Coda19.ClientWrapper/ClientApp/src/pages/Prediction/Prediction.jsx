@@ -85,7 +85,7 @@ const Prediction = () => {
   };
 
   const propsVaccination = {
-    title: 'Vaccination effort globally',
+    title: 'Forecasted infection for the next two weeks',
     width: getResponsiveWidth(),
   };
 
