@@ -5,10 +5,12 @@
 import DateFnsUtils from '@date-io/date-fns';
 import {
   AppBar,
+  Grid,
   Hidden,
   Paper,
   Tab,
   Tabs,
+  Typography,
   useMediaQuery,
 } from '@material-ui/core';
 import {
@@ -47,6 +49,42 @@ const Home = () => {
   const [localCases, setLocalCases] = useState([]);
   const [localTests, setLocalTests] = useState([]);
   const [localDeaths, setLocalDeaths] = useState([]);
+  const [casesLeaderboard, setCasesLeaderboard] = useState();
+  const [testsLeaderboard, setTestsLeaderboard] = useState();
+  const [deathsLeaderboard, setDeathsLeaderboard] = useState();
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Leaderboard/cases?PageSize=10`
+      )
+      .then((res) => {
+        const { data } = res;
+        setCasesLeaderboard(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Leaderboard/deaths?PageSize=10`
+      )
+      .then((res) => {
+        const { data } = res;
+        setDeathsLeaderboard(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Leaderboard/tests?PageSize=10`
+      )
+      .then((res) => {
+        const { data } = res;
+        setTestsLeaderboard(data);
+      });
+  }, []);
 
   useEffect(() => {
     axios
@@ -126,14 +164,6 @@ const Home = () => {
       });
   }, [country, selectedDate]);
 
-  useEffect(() => {
-    console.log('Country', country);
-  }, [country]);
-
-  useEffect(() => {
-    console.log(api);
-  }, [api]);
-
   const xxs = useMediaQuery('(max-width:400px)');
   const xs = useMediaQuery('(max-width:600px)');
   const betweenXSandMD = useMediaQuery('(max-width:800px');
@@ -173,8 +203,19 @@ const Home = () => {
     width: getResponsiveWidth(),
   };
 
-  const propsVaccination = {
-    title: 'Vaccination effort globally',
+  const propsLocalCases = {
+    title: 'Confirmed cases of COVID-19 infection in selected locations',
+    width: getResponsiveWidth(),
+  };
+
+  const propsLocalTests = {
+    title: 'Number of realized COVID-19 infection tests in selected locations',
+    width: getResponsiveWidth(),
+  };
+
+  const propsLocalDeaths = {
+    title:
+      'Number of deaths resulted from COVID-19 infections in selected locations',
     width: getResponsiveWidth(),
   };
 
@@ -183,8 +224,18 @@ const Home = () => {
     width: getResponsiveWidth(),
   };
 
+  const propsDailyCases = {
+    title: 'Global daily confirmed cases of COVID-19 infection',
+    width: getResponsiveWidth(),
+  };
+
   const propsDailyTests = {
-    title: 'Daily COIVD-19 tests per thousand people',
+    title: 'Number of global daily COVID-19 infection tests',
+    width: getResponsiveWidth(),
+  };
+
+  const propsDailyDeaths = {
+    title: 'Number of global daily deaths resulted from COVID-19 infections',
     width: getResponsiveWidth(),
   };
 
@@ -200,7 +251,6 @@ const Home = () => {
   };
 
   const handleDateChange = (date) => {
-    console.log(date);
     setSelectedDate(date);
   };
 
@@ -251,7 +301,6 @@ const Home = () => {
 
   const prepareLocalData = (data2) => {
     // eslint-disable-next-line no-extra-boolean-cast
-    console.log(data2);
     let preparedData = {};
     if (!Array.isArray(data2)) {
       const modifiedData = transform(data2);
@@ -273,7 +322,6 @@ const Home = () => {
 
   const prepareLocalTestsData = (data2) => {
     // eslint-disable-next-line no-extra-boolean-cast
-    console.log(data2);
     if (!Array.isArray(data2)) {
       const modifiedData = transformTests(data2);
       let preparedData = {};
@@ -365,7 +413,7 @@ const Home = () => {
               <Paper elevation={2}>
                 <LineChart
                   data={prepareGlobalCases(globalCases)}
-                  properties={propsDailyTests}
+                  properties={propsDailyCases}
                 />
               </Paper>
             </div>
@@ -440,7 +488,7 @@ const Home = () => {
             <Paper elevation={2}>
               <LineChart
                 data={prepareGlobalDeaths(globalDeaths)}
-                properties={propsDailyTests}
+                properties={propsDailyDeaths}
               />
             </Paper>
           </div>
@@ -478,7 +526,7 @@ const Home = () => {
             <Paper elevation={2}>
               <LineChart
                 data={prepareLocalData(localCases)}
-                properties={propsVaccination}
+                properties={propsLocalCases}
               />
             </Paper>
           </div>
@@ -515,7 +563,7 @@ const Home = () => {
             <Paper elevation={2}>
               <LineChart
                 data={prepareLocalTestsData(localTests)}
-                properties={propsDailyTests}
+                properties={propsLocalTests}
               />
             </Paper>
           </div>
@@ -552,47 +600,71 @@ const Home = () => {
             <Paper elevation={2}>
               <LineChart
                 data={prepareLocalDeathsData(localDeaths)}
-                properties={propsDailyTests}
+                properties={propsLocalDeaths}
               />
             </Paper>
           </div>
         </TabPanel>
         <TabPanel value={value} index={6}>
-          <div
-            className={
-              dateBreak
-                ? homeStyles.columnContainer
-                : homeStyles.globalContainer
-            }
-          >
-            <div className={homeStyles.filtersContainer}>
-              <CountrySelector />
-              <div className={homeStyles.rangePicker}>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="dd/MM/yyyy"
-                    margin="normal"
-                    id="date-picker-inline"
-                    label="Pick a start date!"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    KeyboardButtonProps={{
-                      'aria-label': 'change date',
-                    }}
-                  />
-                </MuiPickersUtilsProvider>
-              </div>
-            </div>
+          <Grid container justify="center" direction="row">
+            <Grid item xs={4}>
+              <Typography variant="h6">Top 10 Countries - Cases</Typography>
+            </Grid>
+          </Grid>
+          {casesLeaderboard?.map?.((entry) => (
+            <Grid container jusitfy="center" direction="row" spacing={2}>
+              <Grid container justify="center" spacing={2}>
+                <Grid container justify="center" direction="row" spacing={1}>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{entry.Location}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{entry.NewCases}</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
 
-            <Paper elevation={2}>
-              <LineChart
-                data={prepareGlobalCases(globalCases)}
-                properties={propsDailyTests}
-              />
-            </Paper>
-          </div>
+          <Grid container justify="center" direction="row">
+            <Grid item xs={4}>
+              <Typography variant="h6">Top 10 Countries - Tests</Typography>
+            </Grid>
+          </Grid>
+          {testsLeaderboard?.map?.((entry) => (
+            <Grid container jusitfy="center" direction="row" spacing={2}>
+              <Grid container justify="center" spacing={2}>
+                <Grid container justify="center" direction="row" spacing={1}>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{entry.Location}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{entry.NewTests}</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
+
+          <Grid container justify="center" direction="row">
+            <Grid item xs={4}>
+              <Typography variant="h6">Top 10 Countries - Deaths</Typography>
+            </Grid>
+          </Grid>
+          {deathsLeaderboard?.map?.((entry) => (
+            <Grid container jusitfy="center" direction="row" spacing={2}>
+              <Grid container justify="center" spacing={2}>
+                <Grid container justify="center" direction="row" spacing={1}>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{entry.Location}</Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <Typography variant="body1">{entry.NewDeaths}</Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          ))}
         </TabPanel>
         <TabPanel value={value} index={7}>
           <div
@@ -756,7 +828,7 @@ const Home = () => {
             <Paper elevation={2}>
               <LineChart
                 data={prepareLocalData(localCases)}
-                properties={propsVaccination}
+                properties={propsLocalCases}
               />
             </Paper>
           </div>

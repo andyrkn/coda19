@@ -1,7 +1,15 @@
 /* eslint-disable react/prop-types */
 import { Typography } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
-import { CartesianGrid, Legend, Line, LineChart as RechartsLineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart as RechartsLineChart,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import { chartColors } from 'shared/constants';
 
 import lineChartStyles from './LineChart.module.scss';
@@ -14,7 +22,6 @@ const LineChart = ({ data, properties }) => {
 
   useEffect(() => {
     setDataGraph(data);
-    console.log('lineCHart', data);
   }, [data]);
 
   useEffect(() => {
@@ -52,7 +59,6 @@ const LineChart = ({ data, properties }) => {
             stroke={colors[index]}
           />
         ))}
-
       </RechartsLineChart>
     </div>
   );

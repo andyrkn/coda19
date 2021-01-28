@@ -25,10 +25,6 @@ const Spread = () => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(spread);
-  }, [spread]);
-
   return (
     <section>
       <div className={spreadStyles.container}>

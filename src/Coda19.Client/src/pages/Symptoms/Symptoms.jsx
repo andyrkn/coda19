@@ -18,10 +18,6 @@ const Symptoms = () => {
   }, []);
 
   useEffect(() => {
-    console.log(symptoms);
-  }, [symptoms]);
-
-  useEffect(() => {
     axios
       .get(`http://support.coda19.ashbell-platform.com/api/Symptom`)
       .then((res) => {
