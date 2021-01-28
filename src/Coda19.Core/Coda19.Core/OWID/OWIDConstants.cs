@@ -9,10 +9,16 @@ namespace Coda19.Core.OWID
         public static readonly Uri EventsUri = new Uri("http://escape.velocity/events#");
         public static readonly Uri LocationUri = new Uri("http://escape.velocity/location#");
         public static readonly Uri DateUri = new Uri("http://escape.velocity/date#");
+        public static readonly Uri TipsUri = new Uri("http://escape.velocity/tips#");
+        public static readonly Uri SpreadUri = new Uri("http://escape.velocity/spread#");
+        public static readonly Uri SymptomUri = new Uri("http://escape.velocity/symptom#");
 
         public const string EventsPrefix = "event";
         public const string LocationPrefix = "loc";
         public const string DatePrefix = "date";
+        public const string TipsPrefix = "tips";
+        public const string SpreadPrefix = "spread";
+        public const string SymptomPrefix = "symptom";
 
         public const string LocationLink = nameof(LocationLink); 
         public const string DateLink = nameof(DateLink);
