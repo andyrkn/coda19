@@ -2,234 +2,357 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Technical Report</title>
-  <link rel="stylesheet"
-    href="report.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
-    rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Technical Report</title>
+    <link rel="stylesheet"
+        href="report.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
 </head>
 
 <body prefix="schema: http://schema.org">
-  <header>
-    <h1>CODA - Final Technical Report</h1>
-  </header>
-  <div role="contentinfo">
-    <h3>Authors</h3>
-    <ul>
-      <li>Borsan Razvan</li>
-      <li>Mihaila Andrei</li>
-      <li>Mirza Bogdan</li>
-    </ul>
-    <ol role="directory">
-      <li> <a href="#abstract"><span>1.</span> Abstract</a></li>
-      <li> <a href="#introducere"><span>2.</span> Introduction</a></li>
-      <li> <a href="#context"><span>3.</span> Context of Use</a></li>
-      <li> <a href="#utilizatori"><span>4.</span> Main Audience</a></li>
-      <li> <a href="#internal"><span>5.</span> Internal Data Models</a></li>
-      <li> <a href="#external"><span>6.</span> External Data Sources</a></li>
-      <li> <a href="#linked"><span>7.</span> Linked Data Principles</a></li>
-      <li> <a href="#progress"><span>8.</span> Project Progress</a></li>
-      <li> <a href="#apis"><span>9.</span>API Layer</a></li>
-      <ul>
-        <li><a href="#apis-evolution">9.1 Evolution</a></li>
-        <li><a href="#apis-prediction">9.2 Prediction</a></li>
+    <header>
+        <h1>CODA - Final Technical Report</h1>
+    </header>
+    <div role="contentinfo">
+        <h3>Authors</h3>
         <ul>
-          <li><a href="#apis-prediction-public">9.2.1 Public Facing</a></li>
-          <li><a href="#apis-prediction-internal">9.2.2 Internal</a></li>
+            <li>Borsan Razvan</li>
+            <li>Mihaila Andrei</li>
+            <li>Mirza Bogdan</li>
         </ul>
-        <li><a href="#apis-support">9.3 Support</a></li>
-      </ul>
-      <li> <a href=#deployment>10. Deployment</a></li>
-    </ol>
-  </div>
-  <section typeof="sa:Abstract"
-    id="abstract"
-    role="doc-abstract">
-    <h2><span>1.</span> Abstract</h2>
-    <p>
-      In this document we will present the internal data models to be used and the external data sources managed
-      by the Web application which we will implement.
-    </p>
-  </section>
-  <section id="introducere"
-    role="doc-introduction">
-    <h2><span>2.</span> Introduction</h2>
-    <p>
-      Data visualization refers to the techniques used to communicate information from data through
-      visual representation. Its main purpose is to distill large data sets into visual graphics
-      to allow an easy understanding of the complex relationships within the data. It is often used in a way
-      interchangeable with terms such as informational graphics, statistical graphics and information
-      visualization.
-    </p>
-    <p>
-      It is one of the steps in the data science process developed by Joe Blitzstein, who is a
-      framework to address the tasks of data science. After the data is collected, processed and modeled,
-      relationships must be visualized so that a conclusion can be drawn.
-    </p>
-    <p>
-      For this reason, planning the models used in the Web application is an important process for the user to
-      benefit from the best information when accessing the web page.
-    </p>
-  </section>
-  <section id="context">
-    <h2><span>3.</span> Context of Use</h2>
-    <p>
-      The context of use is the real conditions in which a given software product is used or will be used
-      in a normal daily work situation.
-    </p>
-    <p>
-      COVID-19 data for all site is an evolving software product that provides the latest data
-      for the entire population of the planet about the latest statistics on the global spread of the virus.
-      Users who access this community have access to the latest information about coronavirus, such as:
-    </p>
-
-    <ul>
-      <li>Cases, deaths and the number of total healed</li>
-      <li>Information on how the virus spreads</li>
-      <li>Information about the symptoms of the virus</li>
-      <li>Information about the evolution of the virus</li>
-      <li>Predictions about the evolution of the virus for the next few days.</li>
-    </ul>
-  </section>
-  <section id="utilizatori">
-    <h2><span>4.</span> Main Audience</h2>
-    <p>
-      The sites about coronavirus are the most used sites in the last year. How virus can affect anyone, the site
-      is accessed mainly by a majority of the globe with access at the Internet.
-    </p>
-  </section>
-  <section id="internal">
-    <h2><span>5.</span>Internal Data Models</h2>
-    <p>
-      The Web application developed by us has two types of users, those who manage the page and the public one who
-      can access information about coronavirus.
-    </p>
-    <p>
-      Administrators are the ones who can add new coronavirus cases, tips against the virus and the latest virus
-      information to the application. To add a new coronavirus case, the administrator must add the following
-      information: the day the case was reported, the person's gender, age, location, and other relevant data.
-      To add new virus advice or information, the administrator must add a title, description, and certain tags to
-      make them easier to be found.
-    </p>
-    <img alt
-      class="desktop-image"
-      src="admin.PNG">
-    <p>
-      Here you can see the model for adding a new case of coronavirus.
-    </p>
-    <p>
-      A person who visits the web page can view statistics about the evolution of the virus or predictions for the
-      next days of the virus over a certain period of time, over a certain age range, location, gender or
-      different tags. Below you can see a model of an evolution.
-    </p>
-    <img alt
-      class="desktop-image"
-      src="evolution.PNG">
-    <p>
-      A user can also look for some tips for preventing the virus based on a title or certain tags.
-    </p>
-    <img alt
-      class="desktop-image"
-      src="advice.PNG">
-  </section>
-  <section id="external">
-    <h2><span>6.</span> External Data Sources</h2>
-    <p>
-      External data is data that is not collected by us. This data would be obtained from a source outside of our
-      project. For a start we thought of using the Apify API which gives us information about coronavirus from a
-      selected country.
-    </p>
-    <img alt
-      class="desktop-image"
-      src="external.PNG">
-  </section>
-  <section id="linked">
-    <h2><span>7.</span> Linked Data Principles</h2>
-    <p>
-      Our application conforms with the linked data principles because we use RDF and for a specific URI the
-      application will create a query that provides useful information about what the user was looking for.
-      We use URI as names for things, and users will use HTTP URIs to search for some informations.
-    </p>
-  </section>
-  <section id="progress">
-    <h2><span>8.</span> Project Progress</h2>
-    <p>
-      From the beginning of the implementation of this project we planned to develop a series of functionalities
-      that would offer users a perspective on the data related to COVID-19. These functionalities would be:
-    </p>
-    <ul>
-      <li>Information about global cases on a period of time</li>
-      <li>Information about global test performed on a period of time </li>
-      <li>Information about global deaths on a period of time</li>
-      <li>Information about local cases on a period of time</li>
-      <li>Information about local test performed on a period of time </li>
-      <li>Information about local deaths on a period of time</li>
-      <li>Leaderboards with countries with most cases</li>
-      <li>Informations about history, spread, symptoms and protections</li>
-      <li>A neuronal network system that will calculate de number of cases for a period of time</li>
-    </ul>
-    <p>
-      For the most part, we followed the plan and implemented all the functionalities, only we made small compromises.
-      In some parts we did not respect the initial design and on the home page we gave up some graphics.
-    </p>
-  </section>
-  <section id="apis">
-    <h2><span>9.</span> API Layers</h2>
-    <section id="apis-evolution">
-      <h3><span>9.1</span> API Layers - Evolution</h2>
+        <ol role="directory">
+            <li> <a href="#abstract"><span>1.</span> Abstract</a></li>
+            <li> <a href="#introducere"><span>2.</span> Introduction</a></li>
+            <li> <a href="#context"><span>3.</span> Context of Use</a></li>
+            <li> <a href="#utilizatori"><span>4.</span> Main Audience</a></li>
+            <li> <a href="#internal"><span>5.</span> Internal Data Models</a></li>
+            <li> <a href="#external"><span>6.</span> External Data Sources</a></li>
+            <li> <a href="#linked"><span>7.</span> Linked Data Principles</a></li>
+            <ul>
+                <li><a href="#linked-internal"><span>7.1</span> Internal Data Modelling</a></li>
+                <ul>
+                    <li><a href="#linked-internal-loc"><span>7.1.1</span> Location graph</a></li>
+                    <li><a href="#linked-internal-event"><span>7.1.2</span> Events graph</a></li>
+                    <li><a href="#linked-internal-support"><span>7.1.3</span> Support graphs</a></li>
+                </ul>
+                <li><a href="#linked-usage"><span>7.2</span> SparQL Usage</a></li>
+                <ul>
+                    <li><a href="#linked-usage-query-builder"><span>7.2.1</span> SparqlQueryBuilder</a></li>
+                    <li><a href="#linked-usage-update-builder"><span>7.2.2</span> SparqlUpdateBuilder</a></li>
+                    <li><a href="#linked-usage-connectors"><span>7.2.3</span> Sesame Connector</a></li>
+                </ul>
+            </ul>
+            <li> <a href="#progress"><span>8.</span> Project Progress</a></li>
+            <li> <a href="#apis"><span>9.</span>API Layer</a></li>
+            <ul>
+                <li><a href="#apis-evolution">9.1 Evolution</a></li>
+                <li><a href="#apis-prediction">9.2 Prediction</a></li>
+                <ul>
+                    <li><a href="#apis-prediction-public">9.2.1 Public Facing</a></li>
+                    <li><a href="#apis-prediction-internal">9.2.2 Internal</a></li>
+                </ul>
+                <li><a href="#apis-support">9.3 Support</a></li>
+            </ul>
+            <li> <a href=#deployment>10. Deployment</a></li>
+        </ol>
+    </div>
+    <section typeof="sa:Abstract"
+        id="abstract"
+        role="doc-abstract">
+        <h2><span>1.</span> Abstract</h2>
         <p>
-          First APIs implemented are those needed for showing the data on the Home tab. Here the user can analyze some
-          charts
-          regarding the evolution of the virus in a period of time globally or specific for some countries.
+            In this document we will present the internal data models to be used and the external data sources managed
+            by the Web application which we will implement.
+        </p>
+    </section>
+    <section id="introducere"
+        role="doc-introduction">
+        <h2><span>2.</span> Introduction</h2>
+        <p>
+            Data visualization refers to the techniques used to communicate information from data through
+            visual representation. Its main purpose is to distill large data sets into visual graphics
+            to allow an easy understanding of the complex relationships within the data. It is often used in a way
+            interchangeable with terms such as informational graphics, statistical graphics and information
+            visualization.
+        </p>
+        <p>
+            It is one of the steps in the data science process developed by Joe Blitzstein, who is a
+            framework to address the tasks of data science. After the data is collected, processed and modeled,
+            relationships must be visualized so that a conclusion can be drawn.
+        </p>
+        <p>
+            For this reason, planning the models used in the Web application is an important process for the user to
+            benefit from the best information when accessing the web page.
+        </p>
+    </section>
+    <section id="context">
+        <h2><span>3.</span> Context of Use</h2>
+        <p>
+            The context of use is the real conditions in which a given software product is used or will be used
+            in a normal daily work situation.
+        </p>
+        <p>
+            COVID-19 data for all site is an evolving software product that provides the latest data
+            for the entire population of the planet about the latest statistics on the global spread of the virus.
+            Users who access this community have access to the latest information about coronavirus, such as:
+        </p>
+
+        <ul>
+            <li>Cases, deaths and the number of total healed</li>
+            <li>Information on how the virus spreads</li>
+            <li>Information about the symptoms of the virus</li>
+            <li>Information about the evolution of the virus</li>
+            <li>Predictions about the evolution of the virus for the next few days.</li>
+        </ul>
+    </section>
+    <section id="utilizatori">
+        <h2><span>4.</span> Main Audience</h2>
+        <p>
+            The sites about coronavirus are the most used sites in the last year. How virus can affect anyone, the site
+            is accessed mainly by a majority of the globe with access at the Internet.
+        </p>
+    </section>
+    <section id="internal">
+        <h2><span>5.</span>Internal Data Models</h2>
+        <p>
+            The Web application developed by us has two types of users, those who manage the page and the public one who
+            can access information about coronavirus.
+        </p>
+        <p>
+            Administrators are the ones who can add new coronavirus cases, tips against the virus and the latest virus
+            information to the application. To add a new coronavirus case, the administrator must add the following
+            information: the day the case was reported, the person's gender, age, location, and other relevant data.
+            To add new virus advice or information, the administrator must add a title, description, and certain tags to
+            make them easier to be found.
         </p>
         <img alt
-          class="desktop-image"
-          src="evolution-api.PNG">
-    </section>
-    <section id="apis-prediction">
-      <h3><span>9.2</span> API Layers - Prediction</h3>
-      <section>
-        <section id="apis-prediction-public">
-          <h4><span>9.2.1</span> API Layers - Prediction - Public</h4>
-          <p>
-            The Prediction API will the take care of orchestrating and feeding data to the internal API. it will also
-            handle client requests and data parsing from and to the internal API.
-          </p>
-          <img alt
             class="desktop-image"
-            src="prediction-api.PNG">
-        </section>
-        <section>
-          <h4><span>9.2.1</span> API Layers - Prediction - Internal</h4>
-            Here we have an Internal API build specifically for predicting cases based on a loopback. Inside this API 
-            we also have a project where we can train another model or improve it. We use a LongShortTermMemory neural network with a Loopback of 14.
-            This API Is hosted using flask and only serves a getPrediction endpoint.
-        </section>
-      </section>
+            src="admin.PNG">
+        <p>
+            Here you can see the model for adding a new case of coronavirus.
+        </p>
+        <p>
+            A person who visits the web page can view statistics about the evolution of the virus or predictions for the
+            next days of the virus over a certain period of time, over a certain age range, location, gender or
+            different tags. Below you can see a model of an evolution.
+        </p>
+        <img alt
+            class="desktop-image"
+            src="evolution.PNG">
+        <p>
+            A user can also look for some tips for preventing the virus based on a title or certain tags.
+        </p>
+        <img alt
+            class="desktop-image"
+            src="advice.PNG">
     </section>
-    <section id="apis-support">
-      <h3><span>9.3</span> API Layers - Support</h2>
-      <p>
-        The Support set of APIs returns data about spread, symptoms and protections to the user.
-      </p>
-      <img alt
-        class="desktop-image"
-        src="support-api.PNG">
+    <section id="external">
+        <h2><span>6.</span> External Data Sources</h2>
+        <p>
+            External data is data that is not collected by us. This data would be obtained from a source outside of our
+            project. For a start we thought of using the Apify API which gives us information about coronavirus from a
+            selected country.
+        </p>
+        <img alt
+            class="desktop-image"
+            src="external.PNG">
     </section>
-  </section>
-  <section id="deployment">
-    <h2><span>10.</span>Deployment</h2>
-    The entire system is deployed on azure
-    <br>
-     - one react static client under a NET .Core MVC 5 in a Azure AppService.
-    <br>
-     - one flask API as internal
-    <br>
-     - The left 3 APIs as IIS Websites with custom DNS
-  </section>
+    <section id="linked">
+        <h2><span>7.</span> Linked Data Principles</h2>
+        <p>
+            Our application conforms with the linked data principles because we use RDF and for a specific URI the
+            application will create a query that provides useful information about what the user was looking for.
+            We use URI as names for things, and users will use HTTP URIs to search for some informations.
+        </p>
+        <p>
+            We gather most of our data from the <a href="https://github.com/owid/covid-19-data">OurWorldInData</a>
+            source.
+            We have implemented parses which can automatically take in the necessary data inside our Coda19.Reader
+            project.
+        </p>
+        <section id="linked-internal">
+            <h3><span>7.1</span> Internal graph modelling</h3>
+            <p>
+                Our system is comprised of the following graphs:
+            </p>
+            <img alt
+                class="desktop-image"
+                src="graphs.png">
+            <section id="linked-internal-loc">
+                <h3><span>7.1.1</span>"&lthttp://escape.velocity/location#&gt"</h3>
+                <p>
+                    This graph covers all the possible locations in our system, identified by a continent and a country.
+                    The ID of the graph is represented by the country code.
+                </p>
+                <img alt
+                    class="desktop-image"
+                    src="locations.png">
+            </section>
+            <section id="linked-internal-event">a
+                <h3><span>7.1.2</span>"&lthttp://escape.velocity/events#&gt"</h3>
+                <p>In this graph we store all the cases on a day basis, per location. This graph uses two links, one for
+                    Location, and one for Date. We decided to create a sparql prefix for date as well, for easier
+                    querying.
+
+                    The id is automatically generated on insertion inside our project.
+                </p>
+                <img alt
+                    class="desktop-image"
+                    src="events.png">
+            </section>
+            <section id="linked-internal-support">
+                <h3><span>7.1.3</span> Support graphs </h3>
+                <p>
+                    For our Symptoms, Tips and Spread graphs, we wont go in detail, as they are simple. The only offer
+                    a collection of strings which users can read when they open our websites. Inside our API, we pick
+                    one
+                    at random from each graph.
+                </p>
+            </section>
+        </section>
+        <section id="linked-usage">
+            <h3><span>7.2</span> SparQL Usage</h3>
+            <p>
+                In order to have a good experience using SparQL across 4 APIs, we've decided the best course
+                of action would be to implement a mechanism which would allow us to send queries and commands in the
+                easiest way.
+            </p>
+            <p>
+                With this reason in mind we built the <b>SparqlQueryBuilder</b> and the <b>SparqlUpdateBuilder</b>. They
+                allow
+                us to create through code all the queries in commands in a simple and explicit way, hiding all the
+                SparQL
+                behind the scenes. Ofcourse, a level of SparQL knowledge is still needed to understand the concepts of
+                subject,
+                predicate and literal.
+            </p>
+            <section id="linked-usage-query-builder">
+                <h3><span>7.2.1</span> SparqlQueryBuilder</h3>
+                <p>
+                    A query using the QueryBuilder looks something like this:
+                </p>
+                <img alt
+                    class="desktop-image"
+                    src="query.png">
+                <p>
+                    The query builder also offers
+                <ul>
+                    <li>Pagination, Aggregation, Inter-Graph Querying</li>
+                    <li>Instant execution of the query through our inhouse ISparqlQueryRunner</li>
+                    <li>Return in a json format of all the items returned by SparQL</li>
+                    <li>Deserialization in a choice of a C# class that gets automatically paginated</li>
+                </ul>
+                </p>
+            </section>
+
+            <section id="linked-usage-update-builder">
+                <h3><span>7.2.2</span> SparqlQueryBuilder</h3>
+                <p>
+                    For our update builder, it looks something like this:
+                </p>
+                <img alt class="desktop-image" src="update.png"></img>
+                <p>
+                    It offers the following
+                    <ul>
+                        <li>Building a SparQL update, supporting multiple formats, and linking to another graph.</li>
+                        <li>Instant asynchronous running with our inhouse SparqlUpdateRunner</li>
+                    </ul>
+                </p>
+            </section>
+
+            <section id="linked-usage-connectors">
+                <h3><span>7.2.3</span> Sesame Connector</h3>
+                <p>
+                    For communication with the SPARQL Endpoint provided by GraphDB, se use the <b>SesameHttpProtocolConnector</b>
+                    provided by the <b>DotNetRdf</b> C# NuGet package.
+                </p>
+            </section>
+        </section>
+    </section>
+    <section id="progress">
+        <h2><span>8.</span> Project Progress</h2>
+        <p>
+            From the beginning of the implementation of this project we planned to develop a series of functionalities
+            that would offer users a perspective on the data related to COVID-19. These functionalities would be:
+        </p>
+        <ul>
+            <li>Information about global cases on a period of time</li>
+            <li>Information about global test performed on a period of time </li>
+            <li>Information about global deaths on a period of time</li>
+            <li>Information about local cases on a period of time</li>
+            <li>Information about local test performed on a period of time </li>
+            <li>Information about local deaths on a period of time</li>
+            <li>Leaderboards with countries with most cases</li>
+            <li>Informations about history, spread, symptoms and protections</li>
+            <li>A neuronal network system that will calculate de number of cases for a period of time</li>
+        </ul>
+        <p>
+            For the most part, we followed the plan and implemented all the functionalities, only we made small
+            compromises.
+            In some parts we did not respect the initial design and on the home page we gave up some graphics.
+        </p>
+    </section>
+    <section id="apis">
+        <h2><span>9.</span> API Layers</h2>
+        <section id="apis-evolution">
+            <h3><span>9.1</span> API Layers - Evolution</h2>
+                <p>
+                    First APIs implemented are those needed for showing the data on the Home tab. Here the user can
+                    analyze some
+                    charts
+                    regarding the evolution of the virus in a period of time globally or specific for some countries.
+                </p>
+                <img alt
+                    class="desktop-image"
+                    src="evolution-api.PNG">
+        </section>
+        <section id="apis-prediction">
+            <h3><span>9.2</span> API Layers - Prediction</h3>
+            <section>
+                <section id="apis-prediction-public">
+                    <h4><span>9.2.1</span> API Layers - Prediction - Public</h4>
+                    <p>
+                        The Prediction API will the take care of orchestrating and feeding data to the internal API. it
+                        will also
+                        handle client requests and data parsing from and to the internal API.
+                    </p>
+                    <img alt
+                        class="desktop-image"
+                        src="prediction-api.PNG">
+                </section>
+                <section>
+                    <h4><span>9.2.1</span> API Layers - Prediction - Internal</h4>
+                    Here we have an Internal API build specifically for predicting cases based on a loopback. Inside
+                    this API
+                    we also have a project where we can train another model or improve it. We use a LongShortTermMemory
+                    neural network with a Loopback of 14.
+                    This API Is hosted using flask and only serves a getPrediction endpoint.
+                </section>
+            </section>
+        </section>
+        <section id="apis-support">
+            <h3><span>9.3</span> API Layers - Support</h2>
+                <p>
+                    The Support set of APIs returns data about spread, symptoms and protections to the user.
+                </p>
+                <img alt
+                    class="desktop-image"
+                    src="support-api.PNG">
+        </section>
+    </section>
+    <section id="deployment">
+        <h2><span>10.</span>Deployment</h2>
+        The entire system is deployed on azure
+        <br>
+        - one react static client under a NET .Core MVC 5 in a Azure AppService.
+        <br>
+        - one flask API as internal
+        <br>
+        - The left 3 APIs as IIS Websites with custom DNS
+    </section>
 </body>
 
 </html>

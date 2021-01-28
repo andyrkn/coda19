@@ -10,6 +10,10 @@ h1, h2 {
     color:#4b0061;
 }
 
+h3 {
+    color:rgb(145, 32, 173);
+}
+
 h1, h2, h3, h4, h5, h6 {
     letter-spacing: .0375em;
 }
