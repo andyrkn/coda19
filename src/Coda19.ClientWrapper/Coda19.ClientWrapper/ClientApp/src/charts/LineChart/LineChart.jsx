@@ -14,7 +14,6 @@ import { chartColors } from 'shared/constants';
 
 import lineChartStyles from './LineChart.module.scss';
 
-// import PropTypes from 'prop-types';
 const LineChart = ({ data, properties }) => {
   const { title, width } = properties;
   const [colors, setColors] = useState(chartColors);
