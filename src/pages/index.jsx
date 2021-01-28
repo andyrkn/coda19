@@ -55,6 +55,58 @@ const IndexPage = () => {
           regarding the state of everyone&apos;s work.
         </p>
       </>
+      <>
+        <h1>4. Preparations for the final deliverables*</h1>
+        <p>
+          Our fourth meeting was going about how we are going to split over the
+          microservices that needed to be implemented and we reviewed the notes
+          for the A compononet.
+        </p>
+        <p>
+          We decided to move to a triple store implementation, following the advice
+          and removed the in memory graph storage.
+        </p>
+      </>
+      <>
+        <h1>5. Preparations the work for the backend*</h1>
+        <p>
+          The most important part was implementing the core of our microservices:
+             - The SparQL Query runners.
+        </p>
+        <p>
+          A generic solution for querying and updating the rdf riple store was 
+          implemented. This allowed us to be very nimble in implementing SparQL 
+          Queries. We wrote unit tests over this core functionality and proceeded
+          with relief on the next topics
+        </p>
+      </>
+      <>
+        <h1>6. Preparations the work for the frontend*</h1>
+        <p>
+          For all the pages most common components had to implemented before 
+          the actual work started. Here we split and worked with mocked data for
+          a bit until we had all the tools to implement the necessary pages
+        </p>
+      </>
+      <>
+        <h1>7. Back end deployment*</h1>
+        <p>
+          In order for the front-end to work easily across 3 developers, 
+          we finished and deployed in the cloud the backend first.
+          We needed 3 sites in azure and another for our internal private API.
+          For the APIs we used simple IIS hosting and Flask for the internal
+          neural network
+        </p>
+      </>
+      <>
+        <h1>8. Front end deployment*</h1>
+        <p>
+          Some tweaks had to be made for the front end to be deployed. 
+          We wrapped the static react client around a .NET 5 MVC Host.
+          This made it very easy to deploy the front end to a Azure
+          App Service. It's currently available at https://coda19.azurewebsites.net/ !
+        </p>
+      </>
     </Layout>
   )
 }
