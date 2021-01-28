@@ -29,10 +29,8 @@ const CountrySelector = () => {
       <Paper elevation={0}>
         <Autocomplete
           multiple
-          open
           limitTags={0}
           disableCloseOnSelect
-          disablePortal
           disableListWrap
           id="multiple-limit-countries"
           options={countries}

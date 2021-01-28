@@ -10,6 +10,7 @@ namespace Coda19.Core.SparqlBuilder
             _prefixes.Add($"PREFIX {OWIDConstants.DatePrefix}:<{OWIDConstants.DateUri}>");
             _prefixes.Add($"PREFIX {OWIDConstants.LocationPrefix}:<{OWIDConstants.LocationUri}>");
             _prefixes.Add($"PREFIX {OWIDConstants.EventsPrefix}:<{OWIDConstants.EventsUri}>");
+            _prefixes.Add($"PREFIX {OWIDConstants.TipsPrefix}:<{OWIDConstants.TipsUri}>");
             return this;
         }
 

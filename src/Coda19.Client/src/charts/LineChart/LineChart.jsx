@@ -1,25 +1,21 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react';
-
-import {
-  LineChart as RechartsLineChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  Line,
-} from 'recharts';
-// import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
-
+import React, { useEffect, useState } from 'react';
+import { CartesianGrid, Legend, Line, LineChart as RechartsLineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import { chartColors } from 'shared/constants';
 
 import lineChartStyles from './LineChart.module.scss';
 
+// import PropTypes from 'prop-types';
 const LineChart = ({ data, properties }) => {
   const { title, width } = properties;
   const [colors, setColors] = useState(chartColors);
+  const [dataGraph, setDataGraph] = useState([]);
+
+  useEffect(() => {
+    setDataGraph(data);
+    console.log('lineCHart', data);
+  }, [data]);
 
   useEffect(() => {
     setColors(chartColors.sort(() => Math.random() - 0.5));
@@ -33,20 +29,20 @@ const LineChart = ({ data, properties }) => {
       <RechartsLineChart
         width={width}
         height={300}
-        data={data?.entries}
+        data={dataGraph?.entries}
         margin={{
           top: 5,
-          right: 30,
+          right: 20,
           left: 50,
           bottom: 30,
         }}
       >
         <CartesianGrid stroke="#f5f5f5" />
-        <XAxis tickMargin={20} dataKey="date" />
-        <YAxis tickMargin={20} />
+        <XAxis tickMargin={20} minTickGap={25} dataKey="date" />
+        <YAxis tickMargin={20} preserveStartEnd />
         <Tooltip />
         <Legend />
-        {data.keys.map((key, index) => (
+        {dataGraph?.keys.map?.((key, index) => (
           <Line
             type="monotone"
             strokeWidth={2}
@@ -56,6 +52,7 @@ const LineChart = ({ data, properties }) => {
             stroke={colors[index]}
           />
         ))}
+
       </RechartsLineChart>
     </div>
   );
