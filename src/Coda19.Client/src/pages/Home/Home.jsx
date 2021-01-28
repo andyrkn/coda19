@@ -3,18 +3,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import DateFnsUtils from '@date-io/date-fns';
-import {
-  AppBar,
-  Hidden,
-  Paper,
-  Tab,
-  Tabs,
-  useMediaQuery,
-} from '@material-ui/core';
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
+import { AppBar, Hidden, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 import axios from 'axios';
 import LineChart from 'charts/LineChart';
 import CountrySelector from 'components/CountrySelector';
@@ -25,17 +15,8 @@ import { useHeaderDispatch } from 'contexts/header-context';
 import React, { useContext, useEffect, useState } from 'react';
 import { PAGES } from 'shared/constants';
 
-import {
-  dailyTestsData,
-  vaccinationData,
-  globalDeaths,
-  globalTests,
-} from './constants';
-import {
-  prepareGlobalCases,
-  prepareGlobalDeaths,
-  prepareGlobalTests,
-} from './helpers';
+import { dailyTestsData } from './constants';
+import { prepareGlobalCases, prepareGlobalDeaths, prepareGlobalTests } from './helpers';
 import homeStyles from './Home.module.scss';
 
 const Home = () => {
@@ -47,7 +28,11 @@ const Home = () => {
   );
   const [value, setValue] = useState(0);
   const [globalCases, setGlobalCases] = useState([]);
+  const [globalTests, setGlobalTests] = useState([]);
+  const [globalDeaths, setGlobalDeaths] = useState([]);
   const [localCases, setLocalCases] = useState([]);
+  const [localTests, setLocalTests] = useState([]);
+  const [localDeaths, setLocalDeaths] = useState([]);
 
   useEffect(() => {
     axios
@@ -56,16 +41,35 @@ const Home = () => {
       )
       .then((res) => {
         const { data } = res;
-        // api.setGlobalCases({ data });
-        console.log(data);
         setGlobalCases(data);
+      });
+  }, [selectedDate]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Global/tests?StartDate=${selectedDate.toISOString()}`
+      )
+      .then((res) => {
+        const { data } = res;
+        setGlobalTests(data);
+      });
+  }, [selectedDate]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Global/deaths?StartDate=${selectedDate.toISOString()}`
+      )
+      .then((res) => {
+        const { data } = res;
+        setGlobalDeaths(data);
       });
   }, [selectedDate]);
 
   useEffect(() => {
     const countryMap = country.countryList.map((entry) => `&Country=${entry}`);
 
-    // console.log('STR', str, countryMap);
     axios
       .get(
         `http://evolution.coda19.ashbell-platform.com/api/evolution/Country/cases?StartDate=${selectedDate.toISOString()}${countryMap.join(
@@ -74,8 +78,37 @@ const Home = () => {
       )
       .then((res) => {
         const { data } = res;
-        console.log(data);
         setLocalCases(data);
+      });
+  }, [country, selectedDate]);
+
+  useEffect(() => {
+    const countryMap = country.countryList.map((entry) => `&Country=${entry}`);
+
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Country/tests?StartDate=${selectedDate.toISOString()}${countryMap.join(
+          ''
+        )}`
+      )
+      .then((res) => {
+        const { data } = res;
+        setLocalTests(data);
+      });
+  }, [country, selectedDate]);
+
+  useEffect(() => {
+    const countryMap = country.countryList.map((entry) => `&Country=${entry}`);
+
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Country/deaths?StartDate=${selectedDate.toISOString()}${countryMap.join(
+          ''
+        )}`
+      )
+      .then((res) => {
+        const { data } = res;
+        setLocalDeaths(data);
       });
   }, [country, selectedDate]);
 
@@ -172,11 +205,40 @@ const Home = () => {
     return output;
   }
 
+  function transformTests(data) {
+    const output = [];
+    Object.keys(data).forEach((current) => {
+      JSON.parse(data[current]).forEach((entry) => {
+        if (output.find((x) => x.date === entry.Date) === undefined) {
+          output.push({ date: entry.Date });
+        }
+
+        const activeEntry = output.find((x) => x.date === entry.Date);
+        activeEntry[current] = parseInt(entry.NewTests, 10);
+      });
+    });
+    return output;
+  }
+
+  function transformDeaths(data) {
+    const output = [];
+    Object.keys(data).forEach((current) => {
+      JSON.parse(data[current]).forEach((entry) => {
+        if (output.find((x) => x.date === entry.Date) === undefined) {
+          output.push({ date: entry.Date });
+        }
+
+        const activeEntry = output.find((x) => x.date === entry.Date);
+        activeEntry[current] = parseInt(entry.NewDeaths, 10);
+      });
+    });
+    return output;
+  }
+
   const prepareLocalData = (data2) => {
-    console.log('localData', data2);
     // eslint-disable-next-line no-extra-boolean-cast
+    console.log(data2);
     if (!Array.isArray(data2)) {
-      console.log('IN IF');
       const modifiedData = transform(data2);
       const keys = Object.keys(modifiedData[0]);
       const preparedData = {
@@ -185,7 +247,40 @@ const Home = () => {
         entries: modifiedData,
       };
 
-      console.log(preparedData);
+      return preparedData;
+    }
+    return [];
+  };
+
+  const prepareLocalTestsData = (data2) => {
+    // eslint-disable-next-line no-extra-boolean-cast
+    console.log(data2);
+    if (!Array.isArray(data2)) {
+      const modifiedData = transformTests(data2);
+      const keys = Object.keys(modifiedData[0]);
+      const preparedData = {
+        keys: keys.filter((key) => key !== 'date'),
+
+        entries: modifiedData,
+      };
+
+      return preparedData;
+    }
+    return [];
+  };
+
+  const prepareLocalDeathsData = (data2) => {
+    // eslint-disable-next-line no-extra-boolean-cast
+    console.log(data2);
+    if (!Array.isArray(data2)) {
+      const modifiedData = transformDeaths(data2);
+      const keys = Object.keys(modifiedData[0]);
+      const preparedData = {
+        keys: keys.filter((key) => key !== 'date'),
+
+        entries: modifiedData,
+      };
+
       return preparedData;
     }
     return [];
@@ -394,7 +489,7 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={dailyTestsData} properties={propsDailyTests} />
+              <LineChart data={prepareLocalTestsData(localTests)} properties={propsDailyTests} />
             </Paper>
           </div>
         </TabPanel>
@@ -428,7 +523,7 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={dailyTestsData} properties={propsDailyTests} />
+              <LineChart data={prepareLocalDeathsData(localDeaths)} properties={propsDailyTests} />
             </Paper>
           </div>
         </TabPanel>
@@ -462,7 +557,7 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={dailyTestsData} properties={propsDailyTests} />
+              <LineChart data={prepareGlobalCases(globalCases)} properties={propsDailyTests} />
             </Paper>
           </div>
         </TabPanel>
