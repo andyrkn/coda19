@@ -3,8 +3,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import DateFnsUtils from '@date-io/date-fns';
-import { AppBar, Hidden, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import {
+  AppBar,
+  Hidden,
+  Paper,
+  Tab,
+  Tabs,
+  useMediaQuery,
+} from '@material-ui/core';
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 import axios from 'axios';
 import LineChart from 'charts/LineChart';
 import CountrySelector from 'components/CountrySelector';
@@ -16,7 +26,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PAGES } from 'shared/constants';
 
 import { dailyTestsData, globalDeaths, globalTests } from './constants';
-import { prepareGlobalCases, prepareGlobalDeaths, prepareGlobalTests } from './helpers';
+import {
+  prepareGlobalCases,
+  prepareGlobalDeaths,
+  prepareGlobalTests,
+} from './helpers';
 import homeStyles from './Home.module.scss';
 
 const Home = () => {
