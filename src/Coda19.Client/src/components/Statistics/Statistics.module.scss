@@ -27,3 +27,11 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .container {
+    :global(.MuiCard-root) {
+      transform: translateY(13em);
+    }
+  }
+}
