@@ -1,5 +1,4 @@
 export const prepareGlobalCases = (data) => {
-  console.log('hhelpers', data);
   if (data.length > 0) {
     const keys = Object.keys(data[0]);
     const preparedData = {
@@ -21,33 +20,40 @@ export const prepareGlobalCases = (data) => {
 };
 
 export const prepareGlobalTests = (data) => {
-  const keys = Object.keys(data[0]);
-  const preparedData = {
-    keys: keys
-      .filter((key) => key !== 'Date')
-      .map((key) => key.replace(/([A-Z])/g, ' $1').trim()),
+  if (data.length > 0) {
+    const keys = Object.keys(data[0]);
+    const preparedData = {
+      keys: keys
+        .filter((key) => key !== 'Date')
+        .map((key) => key.replace(/([A-Z])/g, ' $1').trim()),
 
-    entries: data.map((entry) => ({
-      date: entry.Date,
-      'New Tests': parseInt(entry.NewTests, 10),
-    })),
-  };
+      entries: data.map((entry) => ({
+        date: entry.Date,
+        'New Tests': parseInt(entry.NewTests, 10),
+      })),
+    };
 
-  return preparedData;
+    return preparedData;
+  }
+  return [];
 };
 
 export const prepareGlobalDeaths = (data) => {
-  const keys = Object.keys(data[0]);
-  const preparedData = {
-    keys: keys
-      .filter((key) => key !== 'Date')
-      .map((key) => key.replace(/([A-Z])/g, ' $1').trim()),
+  if (data.length > 0) {
 
-    entries: data.map((entry) => ({
-      date: entry.Date,
-      'New Deaths': parseInt(entry.NewDeaths, 10),
-    })),
-  };
+    const keys = Object.keys(data[0]);
+    const preparedData = {
+      keys: keys
+        .filter((key) => key !== 'Date')
+        .map((key) => key.replace(/([A-Z])/g, ' $1').trim()),
 
-  return preparedData;
+      entries: data.map((entry) => ({
+        date: entry.Date,
+        'New Deaths': parseInt(entry.NewDeaths, 10),
+      })),
+    };
+
+    return preparedData;
+  }
+  return [];
 };
