@@ -34,7 +34,7 @@ namespace Coda19.Core.OWID
         [JsonProperty("human_development_index")]
         public decimal? DevelopmentIndex { get; set; }
 
-        public IList<DayModel> Data;
+        public IList<DayReadModel> Data;
     }
 
     public sealed class DayReadModel
