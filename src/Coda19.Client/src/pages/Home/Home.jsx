@@ -25,7 +25,12 @@ import { useHeaderDispatch } from 'contexts/header-context';
 import React, { useContext, useEffect, useState } from 'react';
 import { PAGES } from 'shared/constants';
 
-import { dailyTestsData, globalDeaths, globalTests } from './constants';
+import {
+  dailyTestsData,
+  vaccinationData,
+  globalDeaths,
+  globalTests,
+} from './constants';
 import {
   prepareGlobalCases,
   prepareGlobalDeaths,
@@ -42,11 +47,12 @@ const Home = () => {
   );
   const [value, setValue] = useState(0);
   const [globalCases, setGlobalCases] = useState([]);
+  const [localCases, setLocalCases] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        `https://localhost:5010/api/evolution/Global/cases?StartDate=${selectedDate.toISOString()}`
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Global/cases?StartDate=${selectedDate.toISOString()}`
       )
       .then((res) => {
         const { data } = res;
@@ -57,24 +63,53 @@ const Home = () => {
   }, [selectedDate]);
 
   useEffect(() => {
-    console.log(country);
+    const countryMap = country.countryList.map((entry) => `&Country=${entry}`);
+
+    // console.log('STR', str, countryMap);
+    axios
+      .get(
+        `http://evolution.coda19.ashbell-platform.com/api/evolution/Country/cases?StartDate=${selectedDate.toISOString()}${countryMap.join(
+          ''
+        )}`
+      )
+      .then((res) => {
+        const { data } = res;
+        console.log(data);
+        setLocalCases(data);
+      });
+  }, [country, selectedDate]);
+
+  useEffect(() => {
+    console.log('Country', country);
   }, [country]);
 
   useEffect(() => {
     console.log(api);
   }, [api]);
 
+  const xxs = useMediaQuery('(max-width:400px)');
   const xs = useMediaQuery('(max-width:600px)');
+  const betweenXSandMD = useMediaQuery('(max-width:800px');
   const md = useMediaQuery('(max-width:1080px)');
+  const dateBreak = useMediaQuery('(max-width:1200px)');
 
-  const getResponsiveGrid = () => {
+  const getResponsiveWidth = () => {
+    if (xxs) {
+      return 200;
+    }
     if (xs) {
-      return 12;
+      return 250;
+    }
+    if (betweenXSandMD) {
+      return 450;
     }
     if (md) {
-      return 6;
+      return 600;
     }
-    return 4;
+    if (dateBreak) {
+      return 750;
+    }
+    return 750;
   };
 
   useEffect(() => {
@@ -83,27 +118,27 @@ const Home = () => {
 
   const props = {
     title: 'Global cases',
-    width: 500,
+    width: getResponsiveWidth(),
   };
 
   const propsSars = {
     title: 'Covid 19 vs Sars',
-    width: 500,
+    width: getResponsiveWidth(),
   };
 
   const propsVaccination = {
     title: 'Vaccination effort globally',
-    width: 500,
+    width: getResponsiveWidth(),
   };
 
   const propsHospitalization = {
     title: 'Number of COVID-19 patients in hospital',
-    width: 500,
+    width: getResponsiveWidth(),
   };
 
   const propsDailyTests = {
     title: 'Daily COIVD-19 tests per thousand people',
-    width: 750,
+    width: getResponsiveWidth(),
   };
 
   function a11yProps(index) {
@@ -122,32 +157,74 @@ const Home = () => {
     setSelectedDate(date);
   };
 
+  function transform(data) {
+    const output = [];
+    Object.keys(data).forEach((current) => {
+      JSON.parse(data[current]).forEach((entry) => {
+        if (output.find((x) => x.date === entry.Date) === undefined) {
+          output.push({ date: entry.Date });
+        }
+
+        const activeEntry = output.find((x) => x.date === entry.Date);
+        activeEntry[current] = parseInt(entry.NewCases, 10);
+      });
+    });
+    return output;
+  }
+
+  const prepareLocalData = (data2) => {
+    console.log('localData', data2);
+    // eslint-disable-next-line no-extra-boolean-cast
+    if (!Array.isArray(data2)) {
+      console.log('IN IF');
+      const modifiedData = transform(data2);
+      const keys = Object.keys(modifiedData[0]);
+      const preparedData = {
+        keys: keys.filter((key) => key !== 'date'),
+
+        entries: modifiedData,
+      };
+
+      console.log(preparedData);
+      return preparedData;
+    }
+    return [];
+  };
+
   return (
     <section className={homeStyles.container}>
       <div>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="scrollable auto tabs example"
-          >
-            <Tab label="Global cases" {...a11yProps(0)} />
-            <Tab label="Global tests" {...a11yProps(1)} />
-            <Tab label="Global deaths" {...a11yProps(2)} />
-            <Tab label="Local Cases" {...a11yProps(3)} />
-            <Tab label="Local Tests" {...a11yProps(4)} />
-            <Tab label="Local Deaths" {...a11yProps(5)} />
-            <Tab label="Leaderboard" {...a11yProps(6)} />
-          </Tabs>
-        </AppBar>
+        <Hidden mdDown>
+          <AppBar position="static" color="default">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              indicatorColor="primary"
+              textColor="primary"
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="scrollable auto tabs example"
+            >
+              <Tab label="Global cases" {...a11yProps(0)} />
+              <Tab label="Global tests" {...a11yProps(1)} />
+              <Tab label="Global deaths" {...a11yProps(2)} />
+              <Tab label="Local Cases" {...a11yProps(3)} />
+              <Tab label="Local Tests" {...a11yProps(4)} />
+              <Tab label="Local Deaths" {...a11yProps(5)} />
+              <Tab label="Leaderboard" {...a11yProps(6)} />
+            </Tabs>
+          </AppBar>
+        </Hidden>
         {/* Global cases */}
         <TabPanel value={value} index={0}>
-          <Hidden xsDown>
-            <div className={homeStyles.globalContainer}>
+          <Hidden mdDown>
+            <div
+              className={
+                dateBreak
+                  ? homeStyles.columnContainer
+                  : homeStyles.globalContainer
+              }
+            >
               <div className={homeStyles.noCountryFilterContainer}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
@@ -173,14 +250,20 @@ const Home = () => {
                 />
               </Paper>
             </div>
-
-            {/* <Map /> */}
           </Hidden>
+
+          {/* <Map /> */}
         </TabPanel>
 
         {/* Global tests */}
         <TabPanel value={value} index={1}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.noCountryFilterContainer}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
@@ -210,7 +293,13 @@ const Home = () => {
 
         {/* Global Deaths */}
         <TabPanel value={value} index={2}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.noCountryFilterContainer}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
@@ -238,8 +327,15 @@ const Home = () => {
           </div>
         </TabPanel>
 
+        {/* Local Cases */}
         <TabPanel value={value} index={3}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.filtersContainer}>
               <CountrySelector />
 
@@ -261,12 +357,21 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={dailyTestsData} properties={propsDailyTests} />
+              <LineChart
+                data={prepareLocalData(localCases)}
+                properties={propsVaccination}
+              />
             </Paper>
           </div>
         </TabPanel>
         <TabPanel value={value} index={4}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.filtersContainer}>
               <CountrySelector />
               <div className={homeStyles.rangePicker}>
@@ -294,7 +399,13 @@ const Home = () => {
           </div>
         </TabPanel>
         <TabPanel value={value} index={5}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.filtersContainer}>
               <CountrySelector />
               <div className={homeStyles.rangePicker}>
@@ -322,7 +433,13 @@ const Home = () => {
           </div>
         </TabPanel>
         <TabPanel value={value} index={6}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.filtersContainer}>
               <CountrySelector />
               <div className={homeStyles.rangePicker}>
@@ -350,7 +467,13 @@ const Home = () => {
           </div>
         </TabPanel>
         <TabPanel value={value} index={7}>
-          <div className={homeStyles.globalContainer}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
             <div className={homeStyles.filtersContainer}>
               <CountrySelector />
               <div className={homeStyles.rangePicker}>
@@ -377,62 +500,140 @@ const Home = () => {
             </Paper>
           </div>
         </TabPanel>
-      </div>
+        <Hidden lgUp>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
+            <div className={homeStyles.noCountryFilterContainer}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Pick a start date!"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </div>
 
-      {/* <Grid container direction="column" justify="center" spacing={2}>
-        <Grid container direction="row" justify="center" spacing={2}>
-          <Grid item xs={6}>
-            <Paper elevation={2}>
-              <LineChart data={casesData} properties={props} />
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6}>
-            <Paper elevation={2}>
-              <LineChart data={sarsData} properties={propsSars} />
-            </Paper>
-          </Grid>
-        </Grid>
-
-        <Grid container direction="row" justify="center" spacing={0}>
-          <Grid item>
-            <Paper elevation={2}>
-              <LineChart data={dailyTestsData} properties={propsDailyTests} />
-            </Paper>
-          </Grid>
-        </Grid>
-
-        <Grid container direction="row" justify="center" spacing={2}>
-          <Grid item xs={6}>
-            <Paper elevation={2}>
-              <LineChart data={vaccinationData} properties={propsVaccination} />
-            </Paper>
-          </Grid>
-
-          <Grid item xs={6}>
             <Paper elevation={2}>
               <LineChart
-                data={hospitalizationData}
-                properties={propsHospitalization}
+                data={prepareGlobalCases(globalCases)}
+                properties={propsDailyTests}
               />
             </Paper>
-          </Grid>
-        </Grid>
+          </div>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
+            <div className={homeStyles.noCountryFilterContainer}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Pick a start date!"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </div>
 
-        <Grid container direction="row" justify="center" spacing={2}>
-          <Grid item xs={5}>
             <Paper elevation={2}>
-              <BarChart />
+              <LineChart
+                data={prepareGlobalTests(globalTests)}
+                properties={propsDailyTests}
+              />
             </Paper>
-          </Grid>
+          </div>
 
-          <Grid item xs={7}>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
+            <div className={homeStyles.noCountryFilterContainer}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Pick a start date!"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </div>
+
             <Paper elevation={2}>
-              <ScatterChart />
+              <LineChart
+                data={prepareGlobalDeaths(globalDeaths)}
+                properties={propsDailyTests}
+              />
             </Paper>
-          </Grid>
-        </Grid>
-      </Grid> */}
+          </div>
+          <div
+            className={
+              dateBreak
+                ? homeStyles.columnContainer
+                : homeStyles.globalContainer
+            }
+          >
+            <div className={homeStyles.filtersContainer}>
+              <CountrySelector />
+
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="inline"
+                  format="dd/MM/yyyy"
+                  margin="normal"
+                  id="date-picker-inline"
+                  label="Pick a start date!"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </MuiPickersUtilsProvider>
+            </div>
+
+            <Paper elevation={2}>
+              <LineChart
+                data={prepareLocalData(localCases)}
+                properties={propsVaccination}
+              />
+            </Paper>
+          </div>
+        </Hidden>
+      </div>
     </section>
   );
 };
