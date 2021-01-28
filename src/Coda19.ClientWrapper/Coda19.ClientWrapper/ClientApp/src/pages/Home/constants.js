@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable import/prefer-default-export */
 
 export const dailyTestsData = {
@@ -135,71 +136,25 @@ export const hospitalizationData = {
   ],
 };
 
-export const vaccinationData = {
-  keys: ['USA', 'Israel', 'France', 'UK', 'Russia', 'Romania', 'Hungary'],
-  entries: [
-    {
-      date: '24/12/2020',
-      USA: 1500,
-      Israel: 1000,
-      France: 1800,
-      UK: 1400,
-      Russia: 650,
-      Romania: 200,
-      Hungary: 445,
-    },
-    {
-      date: '25/12/2020',
-      USA: 1800,
-      Israel: 1500,
-      France: 2100,
-      UK: 1800,
-      Russia: 1650,
-      Romania: 1200,
-      Hungary: 1445,
-    },
-    {
-      date: '26/12/2020',
-      USA: 11500,
-      Israel: 11000,
-      France: 11800,
-      UK: 12400,
-      Russia: 3650,
-      Romania: 5200,
-      Hungary: 6445,
-    },
-    {
-      date: '27/12/2020',
-      USA: 50500,
-      Israel: 91000,
-      France: 101800,
-      UK: 102400,
-      Russia: 75650,
-      Romania: 49200,
-      Hungary: 40445,
-    },
-    {
-      date: '28/12/2020',
-      USA: 100500,
-      Israel: 104900,
-      France: 231800,
-      UK: 211400,
-      Russia: 150650,
-      Romania: 170200,
-      Hungary: 165445,
-    },
-    {
-      date: '29/12/2020',
-      USA: 500500,
-      Israel: 404900,
-      France: 631800,
-      UK: 311400,
-      Russia: 250650,
-      Romania: 470200,
-      Hungary: 365445,
-    },
-  ],
-};
+export const vaccinationData = [
+  { date: '2021-01-02', ROU: 1194, AUS: 24 },
+  { date: '2021-01-03', ROU: 3034, AUS: 20 },
+  { date: '2021-01-04', ROU: 3130, AUS: 13 },
+  { date: '2021-01-05', ROU: 4729, AUS: 19 },
+  // { date: '2021-01-06', ROU: '5719', AUS: '10' },
+  // { date: '2021-01-07', ROU: '4951', AUS: '25' },
+  // { date: '2021-01-08', ROU: '4841', AUS: '11' },
+  // { date: '2021-01-09', ROU: '4403', AUS: '13' },
+  // { date: '2021-01-10', ROU: '3082', AUS: '19' },
+  // { date: '2021-01-11', ROU: '1987', AUS: '20' },
+  // { date: '2021-01-12', ROU: '3697', AUS: '16' },
+  // { date: '2021-01-13', ROU: '4424', AUS: '10' },
+  // { date: '2021-01-14', ROU: '3525', AUS: '9' },
+  // { date: '2021-01-15', ROU: '3353', AUS: '20' },
+  // { date: '2021-01-16', ROU: '3218', AUS: '19' },
+  // { date: '2021-01-17', ROU: '2156', AUS: '13' },
+  // { date: '2021-01-18', ROU: '1509', AUS: '10' },
+];
 
 export const casesData = {
   keys: ['confirmed', 'tested', 'dead'],
@@ -385,3 +340,60 @@ export const globalDeaths = [
   { Date: '2021-01-17', NewDeaths: '17412' },
   { Date: '2021-01-18', NewDeaths: '18552' },
 ];
+
+{
+  /* <Grid container direction="column" justify="center" spacing={2}>
+        <Grid container direction="row" justify="center" spacing={2}>
+          <Grid item xs={6}>
+            <Paper elevation={2}>
+              <LineChart data={casesData} properties={props} />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Paper elevation={2}>
+              <LineChart data={sarsData} properties={propsSars} />
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" justify="center" spacing={0}>
+          <Grid item>
+            <Paper elevation={2}>
+              <LineChart data={dailyTestsData} properties={propsDailyTests} />
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" justify="center" spacing={2}>
+          <Grid item xs={6}>
+            <Paper elevation={2}>
+              <LineChart data={vaccinationData} properties={propsVaccination} />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Paper elevation={2}>
+              <LineChart
+                data={hospitalizationData}
+                properties={propsHospitalization}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" justify="center" spacing={2}>
+          <Grid item xs={5}>
+            <Paper elevation={2}>
+              <BarChart />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={7}>
+            <Paper elevation={2}>
+              <ScatterChart />
+            </Paper>
+          </Grid>
+        </Grid>
+      </Grid> */
+}

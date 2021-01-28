@@ -10,8 +10,6 @@ import ChinaMap from 'components/ChinaMap';
 import Statistics from 'components/Statistics';
 import PropTypes from 'prop-types';
 
-import { ReactComponent as CenterSvg } from 'images/virus.svg';
-import { ReactComponent as TopRightSvg } from 'images/halfVirus.svg';
 import { pagesList } from './constants';
 
 import headerStyles from './Header.module.scss';
@@ -26,14 +24,15 @@ const Header = ({ title, description }) => {
       </Helmet>
       <AppBar pagesList={pagesList} />
 
-      <Hidden smUp>
-        <TopRightSvg className={headerStyles.topRightSvg} />
-        <CenterSvg className={headerStyles.centerSvg} />
-      </Hidden>
-
       <MainTitle title={title} description={description} />
 
-      {location.pathname === '/home' ? <Statistics /> : ''}
+      {location.pathname === '/home' ? (
+        <Hidden xsDown>
+          <Statistics />
+        </Hidden>
+      ) : (
+        ''
+      )}
       {location.pathname === '/history' ? <ChinaMap /> : ''}
     </div>
   );
