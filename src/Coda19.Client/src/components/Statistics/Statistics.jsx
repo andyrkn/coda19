@@ -23,7 +23,7 @@ const Statistics = () => {
         const { data } = res;
         setStatistics(data[0]);
       });
-  }, [statistics]);
+  }, []);
 
   return (
     <div className={statisticsStyles.container}>
