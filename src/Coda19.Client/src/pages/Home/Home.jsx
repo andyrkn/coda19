@@ -3,8 +3,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import DateFnsUtils from '@date-io/date-fns';
-import { AppBar, Hidden, Paper, Tab, Tabs, useMediaQuery } from '@material-ui/core';
-import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import {
+  AppBar,
+  Hidden,
+  Paper,
+  Tab,
+  Tabs,
+  useMediaQuery,
+} from '@material-ui/core';
+import {
+  KeyboardDatePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 import axios from 'axios';
 import LineChart from 'charts/LineChart';
 import CountrySelector from 'components/CountrySelector';
@@ -16,7 +26,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PAGES } from 'shared/constants';
 
 import { dailyTestsData } from './constants';
-import { prepareGlobalCases, prepareGlobalDeaths, prepareGlobalTests } from './helpers';
+import {
+  prepareGlobalCases,
+  prepareGlobalDeaths,
+  prepareGlobalTests,
+} from './helpers';
 import homeStyles from './Home.module.scss';
 
 const Home = () => {
@@ -238,14 +252,19 @@ const Home = () => {
   const prepareLocalData = (data2) => {
     // eslint-disable-next-line no-extra-boolean-cast
     console.log(data2);
+    let preparedData = {};
     if (!Array.isArray(data2)) {
       const modifiedData = transform(data2);
-      const keys = Object.keys(modifiedData[0]);
-      const preparedData = {
-        keys: keys.filter((key) => key !== 'date'),
+      if (modifiedData[0]) {
+        const keys = Object.keys(modifiedData[0]);
+        preparedData = {
+          keys: keys.filter((key) => key !== 'date'),
 
-        entries: modifiedData,
-      };
+          entries: modifiedData,
+        };
+
+        return preparedData;
+      }
 
       return preparedData;
     }
@@ -257,12 +276,15 @@ const Home = () => {
     console.log(data2);
     if (!Array.isArray(data2)) {
       const modifiedData = transformTests(data2);
-      const keys = Object.keys(modifiedData[0]);
-      const preparedData = {
-        keys: keys.filter((key) => key !== 'date'),
+      let preparedData = {};
+      if (modifiedData[0]) {
+        const keys = Object.keys(modifiedData[0]);
+        preparedData = {
+          keys: keys.filter((key) => key !== 'date'),
 
-        entries: modifiedData,
-      };
+          entries: modifiedData,
+        };
+      }
 
       return preparedData;
     }
@@ -271,15 +293,17 @@ const Home = () => {
 
   const prepareLocalDeathsData = (data2) => {
     // eslint-disable-next-line no-extra-boolean-cast
-    console.log(data2);
     if (!Array.isArray(data2)) {
       const modifiedData = transformDeaths(data2);
-      const keys = Object.keys(modifiedData[0]);
-      const preparedData = {
-        keys: keys.filter((key) => key !== 'date'),
+      let preparedData = {};
+      if (modifiedData[0]) {
+        const keys = Object.keys(modifiedData[0]);
+        preparedData = {
+          keys: keys.filter((key) => key !== 'date'),
 
-        entries: modifiedData,
-      };
+          entries: modifiedData,
+        };
+      }
 
       return preparedData;
     }
@@ -489,7 +513,10 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={prepareLocalTestsData(localTests)} properties={propsDailyTests} />
+              <LineChart
+                data={prepareLocalTestsData(localTests)}
+                properties={propsDailyTests}
+              />
             </Paper>
           </div>
         </TabPanel>
@@ -523,7 +550,10 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={prepareLocalDeathsData(localDeaths)} properties={propsDailyTests} />
+              <LineChart
+                data={prepareLocalDeathsData(localDeaths)}
+                properties={propsDailyTests}
+              />
             </Paper>
           </div>
         </TabPanel>
@@ -557,7 +587,10 @@ const Home = () => {
             </div>
 
             <Paper elevation={2}>
-              <LineChart data={prepareGlobalCases(globalCases)} properties={propsDailyTests} />
+              <LineChart
+                data={prepareGlobalCases(globalCases)}
+                properties={propsDailyTests}
+              />
             </Paper>
           </div>
         </TabPanel>
