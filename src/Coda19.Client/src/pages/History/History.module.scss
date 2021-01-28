@@ -1,9 +1,0 @@
-@import 'styles/mixins.scss';
-
-.container {
-  margin-top: 13em;
-  text-align: justify;
-  width: 70vw;
-  max-width: 1080px;
-  @include flexStartColumn;
-}
