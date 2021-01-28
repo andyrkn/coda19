@@ -1,0 +1,17 @@
+.container {
+  :global(.MuiPaper-root) {
+    padding: 1em;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .container {
+    :global(.MuiPaper-root) {
+      padding: 2em;
+      width: 23em;
+      // position: absolute;
+      // left: 0;
+      transform: translateY(5em);
+    }
+  }
+}
