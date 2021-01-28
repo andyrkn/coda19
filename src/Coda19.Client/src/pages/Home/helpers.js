@@ -16,7 +16,6 @@ export const prepareGlobalCases = (data) => {
   }
 
   return [];
-
 };
 
 export const prepareGlobalTests = (data) => {
@@ -40,7 +39,6 @@ export const prepareGlobalTests = (data) => {
 
 export const prepareGlobalDeaths = (data) => {
   if (data.length > 0) {
-
     const keys = Object.keys(data[0]);
     const preparedData = {
       keys: keys

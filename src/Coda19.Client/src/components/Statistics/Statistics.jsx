@@ -29,7 +29,6 @@ const Statistics = () => {
     <div className={statisticsStyles.container}>
       <EmptyCard
         content={
-          // <div className={statisticsStyles.stats}>
           <Grid container direction="row" spacing={4}>
             <Grid item xs={4}>
               <StatsCard

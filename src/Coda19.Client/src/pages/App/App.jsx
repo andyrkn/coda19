@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import { HelmetProvider } from 'react-helmet-async';
 
 import Home from 'pages/Home';
@@ -24,6 +24,9 @@ function App() {
       <div className="App">
         <Header title={title} description={description} />
         <Switch>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
           <Route path="/home">
             <Home />
           </Route>
