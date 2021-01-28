@@ -44,7 +44,7 @@ namespace Coda19.Core.SparqlRunner
                 Random random = new Random();
                 var position = random.Next(numberOfResults);
                 var result = results.Results[position];
-                return $"[{string.Join(",", $"{string.Join(",", result.Select(pair => $"\"{pair.Key}\":\"{pair.Value}\""))}")}]";
+                return $"[{string.Join(",", $"{{{string.Join(",", result.Select(pair => $"\"{pair.Key}\":\"{pair.Value}\""))}}}")}]";
 
             }
             catch (Exception ex)
