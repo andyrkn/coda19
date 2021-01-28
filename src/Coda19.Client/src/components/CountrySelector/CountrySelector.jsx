@@ -25,12 +25,6 @@ const CountrySelector = () => {
       return '';
     });
 
-    console.log(selectedCountries);
-    // return selectedCountries;
-    // const strArr = str.split('#');
-    // console.log('STRING ARRAY', strArr);
-    // return strArr[strArr.length - 1];
-
     country.setCountryList(selectedCountries);
   };
 
