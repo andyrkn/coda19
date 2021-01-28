@@ -35,6 +35,25 @@ namespace Coda19.Core.SparqlRunner
             }
         }
 
+        public async Task<string> RunRawRandomResult()
+        {
+            try
+            {
+                var results = await Task.Run(() => endpoint.QueryWithResultSet(_query));
+                var numberOfResults = results.Count;
+                Random random = new Random();
+                var position = random.Next(numberOfResults);
+                var result = results.Results[position];
+                return $"[{string.Join(",", $"{string.Join(",", result.Select(pair => $"\"{pair.Key}\":\"{pair.Value}\""))}")}]";
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(_query, ex);
+            }
+        }
+        
+
         public async Task<PaginatedList<T>> Run<T>()
         {
             try

@@ -9,6 +9,12 @@ namespace Coda19.SupportAPI
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Coda19.SupportAPI", Version = "v1" }));
             services.AddControllers();
         }
@@ -19,7 +25,7 @@ namespace Coda19.SupportAPI
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Coda19.SupportAPI v1"));
-
+            app.UseCors("MyPolicy");
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseDeveloperExceptionPage();
