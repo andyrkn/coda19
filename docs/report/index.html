@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>Technical Report</title>
   <link rel="stylesheet"
-        href="report.css">
+    href="report.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
-        rel="stylesheet">
+    rel="stylesheet">
 </head>
 
 <body prefix="schema: http://schema.org">
@@ -32,12 +32,22 @@
       <li> <a href="#external"><span>6.</span> External Data Sources</a></li>
       <li> <a href="#linked"><span>7.</span> Linked Data Principles</a></li>
       <li> <a href="#progress"><span>8.</span> Project Progress</a></li>
-      <li> <a href="#apis"><span>9.</span> Implemented APIs</a></li>
+      <li> <a href="#apis"><span>9.</span>API Layer</a></li>
+      <ul>
+        <li><a href="#apis-evolution">9.1 Evolution</a></li>
+        <li><a href="#apis-prediction">9.2 Prediction</a></li>
+        <ul>
+          <li><a href="#apis-prediction-public">9.2.1 Public Facing</a></li>
+          <li><a href="#apis-prediction-internal">9.2.2 Internal</a></li>
+        </ul>
+        <li><a href="#apis-support">9.3 Support</a></li>
+      </ul>
+      <li> <a href=#deployment>10. Deployment</a></li>
     </ol>
   </div>
   <section typeof="sa:Abstract"
-           id="abstract"
-           role="doc-abstract">
+    id="abstract"
+    role="doc-abstract">
     <h2><span>1.</span> Abstract</h2>
     <p>
       In this document we will present the internal data models to be used and the external data sources managed
@@ -45,7 +55,7 @@
     </p>
   </section>
   <section id="introducere"
-           role="doc-introduction">
+    role="doc-introduction">
     <h2><span>2.</span> Introduction</h2>
     <p>
       Data visualization refers to the techniques used to communicate information from data through
@@ -105,8 +115,8 @@
       make them easier to be found.
     </p>
     <img alt
-         class="desktop-image"
-         src="admin.PNG">
+      class="desktop-image"
+      src="admin.PNG">
     <p>
       Here you can see the model for adding a new case of coronavirus.
     </p>
@@ -116,14 +126,14 @@
       different tags. Below you can see a model of an evolution.
     </p>
     <img alt
-         class="desktop-image"
-         src="evolution.PNG">
+      class="desktop-image"
+      src="evolution.PNG">
     <p>
       A user can also look for some tips for preventing the virus based on a title or certain tags.
     </p>
     <img alt
-         class="desktop-image"
-         src="advice.PNG">
+      class="desktop-image"
+      src="advice.PNG">
   </section>
   <section id="external">
     <h2><span>6.</span> External Data Sources</h2>
@@ -133,8 +143,8 @@
       selected country.
     </p>
     <img alt
-         class="desktop-image"
-         src="external.PNG">
+      class="desktop-image"
+      src="external.PNG">
   </section>
   <section id="linked">
     <h2><span>7.</span> Linked Data Principles</h2>
@@ -167,28 +177,58 @@
     </p>
   </section>
   <section id="apis">
-    <h2><span>9.</span> Implemented APIs</h2>
-    <p>
-      First APIs implemented are those needed for showing the data on the Home tab. Here the user can analyze some
-      charts
-      regarding the evolution of the virus in a period of time globally or specific for some countries.
-    </p>
-    <img alt
-         class="desktop-image"
-         src="evolution-api.PNG">
-    <p>
-      The second set of APIs returns data about spread, symptoms and protections to the user.
-    </p>
-    <img alt
-         class="desktop-image"
-         src="support-api.PNG">
-    <p>
-      The last API is the neuronal network that gives a prediction about what will happen in the near future about
-      the virus.
-    </p>
-    <img alt
-         class="desktop-image"
-         src="prediction-api.PNG">
+    <h2><span>9.</span> API Layers</h2>
+    <section id="apis-evolution">
+      <h3><span>9.1</span> API Layers - Evolution</h2>
+        <p>
+          First APIs implemented are those needed for showing the data on the Home tab. Here the user can analyze some
+          charts
+          regarding the evolution of the virus in a period of time globally or specific for some countries.
+        </p>
+        <img alt
+          class="desktop-image"
+          src="evolution-api.PNG">
+    </section>
+    <section id="apis-prediction">
+      <h3><span>9.2</span> API Layers - Prediction</h3>
+      <section>
+        <section id="apis-prediction-public">
+          <h4><span>9.2.1</span> API Layers - Prediction - Public</h4>
+          <p>
+            The Prediction API will the take care of orchestrating and feeding data to the internal API. it will also
+            handle client requests and data parsing from and to the internal API.
+          </p>
+          <img alt
+            class="desktop-image"
+            src="prediction-api.PNG">
+        </section>
+        <section>
+          <h4><span>9.2.1</span> API Layers - Prediction - Internal</h4>
+            Here we have an Internal API build specifically for predicting cases based on a loopback. Inside this API 
+            we also have a project where we can train another model or improve it. We use a LongShortTermMemory neural network with a Loopback of 14.
+            This API Is hosted using flask and only serves a getPrediction endpoint.
+        </section>
+      </section>
+    </section>
+    <section id="apis-support">
+      <h3><span>9.3</span> API Layers - Support</h2>
+      <p>
+        The Support set of APIs returns data about spread, symptoms and protections to the user.
+      </p>
+      <img alt
+        class="desktop-image"
+        src="support-api.PNG">
+    </section>
+  </section>
+  <section id="deployment">
+    <h2><span>10.</span>Deployment</h2>
+    The entire system is deployed on azure
+    <br>
+     - one react static client under a NET .Core MVC 5 in a Azure AppService.
+    <br>
+     - one flask API as internal
+    <br>
+     - The left 3 APIs as IIS Websites with custom DNS
   </section>
 </body>
 
